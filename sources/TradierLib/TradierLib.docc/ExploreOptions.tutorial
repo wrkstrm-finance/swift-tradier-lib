@@ -1,0 +1,77 @@
+@Tutorial(time: 12) {
+  @Intro(title: "Explore Options with TradierLib") {
+    Learn to discover expirations, fetch quotes for targeted strikes, and pull entire
+    option chains — including greeks — using a few concise calls.
+  }
+
+  @Section(title: "List option expirations") {
+    @ContentAndMedia {
+      Use ``Tradier.CodableService/optionExpirations(for:includeAllRoots:strikes:contractSize:expirationType:)``
+      to retrieve available expirations for a root symbol.
+    }
+    @Steps {
+      @Step {
+        Fetch expirations for AAPL.
+
+        ```swift
+        import TradierLib
+
+        let service = Tradier.CodableService()
+        let expirations = try await service.optionExpirations(for: "AAPL")
+        print("expirations: \(expirations.count)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Quote a few strikes with greeks") {
+    @ContentAndMedia {
+      Call ``Tradier.CodableService/optionQuotes(for:expiration:kind:maxStrikes:includeGreeks:)`` to get quotes
+      for a subset of strikes at a specific expiration, including greek values.
+    }
+    @Steps {
+      @Step {
+        Get the first 3 calls for the nearest expiration with greeks.
+
+        ```swift
+        guard let first = expirations.first else { throw NSError() }
+        let calls = try await service.optionQuotes(
+          for: "AAPL", expiration: first, kind: .call, maxStrikes: 3, includeGreeks: true
+        )
+        for q in calls {
+          let delta = q.greeks?.delta ?? 0
+          print("\(q.symbol): last=\(q.last ?? 0) Δ=\(delta)")
+        }
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Fetch the full option chain") {
+    @ContentAndMedia {
+      Use ``Tradier.CodableService/optionChain(for:expiration:includeGreeks:)`` to retrieve the full chain
+      for a root and expiration. You can enable greeks to enrich analysis.
+    }
+    @Steps {
+      @Step {
+        Pull the chain and summarize.
+
+        ```swift
+        let chain = try await service.optionChain(for: "AAPL", expiration: first, includeGreeks: true)
+        let calls = chain.filter { $0.optionType == "call" }
+        let puts  = chain.filter { $0.optionType == "put" }
+        print("calls=\(calls.count) puts=\(puts.count)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Notes & tips") {
+    @ContentAndMedia {
+      - Cache expirations (``Option/Expiration``) per symbol to minimize requests.
+      - Use batch endpoints where possible and respect rate limits.
+      - Greeks are optional; enable them only when needed for performance.
+    }
+  }
+}
+

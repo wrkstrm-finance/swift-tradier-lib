@@ -1,0 +1,7 @@
+{
+  "expirations": {
+    "expiration": [
+      { "date": "2025-12-19", "expiration_type": "standard", "strikes": { "strike": [100.0, 105.0, 110.0] } }
+    ]
+  }
+}

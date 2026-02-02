@@ -1,0 +1,43 @@
+{
+  "entries" : [
+    {
+      "summary" : "Seed: PJM-SPRINT initialization.",
+      "title" : "Agency Log — TradierLib iOS Engineer"
+    }
+  ],
+  "links" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    },
+    {
+      "author" : "policy",
+      "blocks" : [
+        {
+          "kind" : "paragraph",
+          "text" : [
+            "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+          ]
+        }
+      ]
+    }
+  ],
+  "owners" : [
+
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-ios-engineer",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/ios-engineer/tradier-lib-ios-engineer.agency.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "Tradier Lib Ios Engineer Agency",
+  "updated" : "2025-09-22T03:36:15Z"
+}

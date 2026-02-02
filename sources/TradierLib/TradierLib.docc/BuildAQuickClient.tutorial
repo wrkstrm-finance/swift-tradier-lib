@@ -1,0 +1,122 @@
+@Tutorial(time: 10) {
+  @Intro(title: "Build a Quick Tradier Client") {
+    In this tutorial, you’ll configure a client, fetch quotes, manage a watchlist,
+    and stream live market events with TradierLib.
+  }
+
+  @Section(title: "Set up the client") {
+    @ContentAndMedia {
+      Create a ``Tradier.CodableService``. By default it targets the sandbox.
+    }
+    @Steps {
+      @Step {
+        Create a client instance.
+
+        ```swift
+        import TradierLib
+
+        let service = Tradier.CodableService()
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Fetch quotes") {
+    @ContentAndMedia {
+      Retrieve a single quote, then fetch multiple symbols in one request.
+    }
+    @Steps {
+      @Step {
+        Fetch a single symbol.
+
+        ```swift
+        let aapl = try await service.quote(for: "AAPL")
+        print(aapl.symbol, aapl.last ?? 0)
+        ```
+      }
+      @Step {
+        Fetch a batch of symbols.
+
+        ```swift
+        let quotes = try await service.quotes(for: ["AAPL", "MSFT", "NVDA"])
+        print(quotes.map(\.symbol))
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Manage a watchlist") {
+    @ContentAndMedia {
+      Create a watchlist, add and remove symbols, and fetch it by id.
+    }
+    @Steps {
+      @Step {
+        Create and modify a watchlist.
+
+        ```swift
+        let wl = try await service.createWatchlist(name: "Tech", symbols: ["AAPL", "MSFT"]) 
+        _ = try await service.add(symbols: ["NVDA"], to: wl.id)
+        _ = try await service.remove(symbol: "MSFT", from: wl.id)
+        let fetched = try await service.watchlist(id: wl.id)
+        print(fetched.name)
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Profiles and balances") {
+    @ContentAndMedia {
+      Get the user profile and pull account details and balances.
+    }
+    @Steps {
+      @Step {
+        Fetch profiles and balances.
+
+        ```swift
+        let user = try await service.userProfile()
+        let accountId = user.accounts.account.first?.accountNumber ?? ""
+        let profile = try await service.accountProfile(for: accountId)
+        let balances = try await service.accountBalances(for: accountId)
+        print(profile.account.accountStatus, balances.totalEquity)
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Stream market events") {
+    @ContentAndMedia {
+      Connect a ``TradierEventsClient`` with a session id and stream quotes or trades.
+    }
+    @Steps {
+      @Step {
+        Subscribe and consume events.
+
+        ```swift
+        let client = TradierEventsClient(config: .init())
+        try await client.connect(
+          sessionId: "<your-session-id>",
+          symbols: ["AAPL", "MSFT"],
+          filters: ["quote", "trade"],
+          options: TradierStreamOptions(linebreak: true, validOnly: true)
+        )
+
+        for await event in client.events {
+          switch event {
+          case .quote(let q): print("quote: \(q.symbol) bid=\(q.bid ?? 0) ask=\(q.ask ?? 0)")
+          case .trade(let t): print("trade: \(t.symbol) last=\(t.last ?? "?")")
+          default: break
+          }
+        }
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Next steps") {
+    @ContentAndMedia {
+      Explore placing sandbox orders, option chains, and account activity. Switch to production
+      environments only after validating permissions and controls.
+    }
+  }
+}
+

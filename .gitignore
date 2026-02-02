@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager
+/.build
+/Packages
+
+# Xcode
+/*.xcodeproj
+xcuserdata/
+
+# Local build workaround dirs
+_home/

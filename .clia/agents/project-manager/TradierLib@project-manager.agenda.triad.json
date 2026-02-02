@@ -1,0 +1,63 @@
+{
+  "agent" : {
+    "role" : "project-manager"
+  },
+  "horizons" : [
+    {
+      "key" : "near",
+      "label" : "Near-Term"
+    },
+    {
+      "key" : "mid",
+      "label" : "Mid-Term"
+    },
+    {
+      "key" : "far",
+      "label" : "Long-Term"
+    }
+  ],
+  "links" : [
+
+  ],
+  "milestones" : [
+    {
+      "id" : "near-1",
+      "status" : "planned",
+      "title" : "Milestones, risk register, and CI."
+    },
+    {
+      "id" : "mid-1",
+      "status" : "planned",
+      "title" : "QA and release orchestration."
+    },
+    {
+      "id" : "far-1",
+      "status" : "planned",
+      "title" : "Maintenance and security reviews."
+    }
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "principles" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-project-manager",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/project-manager/tradier-lib-project-manager.agenda.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "AGENDA — TradierLib Project Manager",
+  "updated" : "2025-09-22T03:36:15Z"
+}

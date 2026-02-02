@@ -1,0 +1,53 @@
+{
+  "entries" : [
+    {
+      "title" : "Agency Log"
+    },
+    {
+      "details" : [
+        "agent: project-manager",
+        "updated: 2025-08-27",
+        "-->",
+        "Established project manager role for TradierLib during inaugural PM sprint."
+      ],
+      "summary" : "<!--",
+      "timestamp" : "2025-08-27",
+      "title" : "2025-08-27"
+    }
+  ],
+  "links" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    },
+    {
+      "author" : "policy",
+      "blocks" : [
+        {
+          "kind" : "paragraph",
+          "text" : [
+            "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+          ]
+        }
+      ]
+    }
+  ],
+  "owners" : [
+
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-project-manager",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/project-manager/tradier-lib-project-manager.agency.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "Tradier Lib Project Manager Agency",
+  "updated" : "2025-09-22T03:36:15Z"
+}

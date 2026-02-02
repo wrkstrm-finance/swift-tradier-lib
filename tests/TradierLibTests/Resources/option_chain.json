@@ -1,0 +1,16 @@
+{
+  "options": {
+    "option": [
+      { "symbol": "AAPL250619C00100000", "description": "AAPL Jun 2025 100C", "exch": "OPR", "type": "option", "volume": 10.0, "last_volume": 1.0, "trade_date": 1700000000, "bidsize": 1.0, "bid_date": 1700000000, "asksize": 1.0, "ask_date": 1700000000 },
+      { "symbol": "AAPL250619C00105000", "description": "AAPL Jun 2025 105C", "exch": "OPR", "type": "option", "volume": 10.0, "last_volume": 1.0, "trade_date": 1700000000, "bidsize": 1.0, "bid_date": 1700000001, "asksize": 1.0, "ask_date": 1700000001 },
+      { "symbol": "AAPL250619C00110000", "description": "AAPL Jun 2025 110C", "exch": "OPR", "type": "option", "volume": 10.0, "last_volume": 1.0, "trade_date": 1700000002, "bidsize": 1.0, "bid_date": 1700000002, "asksize": 1.0, "ask_date": 1700000002 },
+      { "symbol": "AAPL250619P00100000", "description": "AAPL Jun 2025 100P", "exch": "OPR", "type": "option", "volume": 12.0, "last_volume": 1.0, "trade_date": 1700000003, "bidsize": 2.0, "bid_date": 1700000003, "asksize": 2.0, "ask_date": 1700000003 },
+      { "symbol": "AAPL250619P00105000", "description": "AAPL Jun 2025 105P", "exch": "OPR", "type": "option", "volume": 12.0, "last_volume": 1.0, "trade_date": 1700000004, "bidsize": 2.0, "bid_date": 1700000004, "asksize": 2.0, "ask_date": 1700000004 },
+      { "symbol": "AAPL250619P00110000", "description": "AAPL Jun 2025 110P", "exch": "OPR", "type": "option", "volume": 12.0, "last_volume": 1.0, "trade_date": 1700000005, "bidsize": 2.0, "bid_date": 1700000005, "asksize": 2.0, "ask_date": 1700000005 },
+      { "symbol": "AAPL250919C00100000", "description": "AAPL Sep 2025 100C", "exch": "OPR", "type": "option", "volume": 14.0, "last_volume": 1.0, "trade_date": 1700000006, "bidsize": 3.0, "bid_date": 1700000006, "asksize": 3.0, "ask_date": 1700000006 },
+      { "symbol": "AAPL250919C00105000", "description": "AAPL Sep 2025 105C", "exch": "OPR", "type": "option", "volume": 14.0, "last_volume": 1.0, "trade_date": 1700000007, "bidsize": 3.0, "bid_date": 1700000007, "asksize": 3.0, "ask_date": 1700000007 },
+      { "symbol": "AAPL250919C00110000", "description": "AAPL Sep 2025 110C", "exch": "OPR", "type": "option", "volume": 14.0, "last_volume": 1.0, "trade_date": 1700000008, "bidsize": 3.0, "bid_date": 1700000008, "asksize": 3.0, "ask_date": 1700000008 },
+      { "symbol": "AAPL250919P00100000", "description": "AAPL Sep 2025 100P", "exch": "OPR", "type": "option", "volume": 16.0, "last_volume": 1.0, "trade_date": 1700000009, "bidsize": 4.0, "bid_date": 1700000009, "asksize": 4.0, "ask_date": 1700000009 }
+    ]
+  }
+}

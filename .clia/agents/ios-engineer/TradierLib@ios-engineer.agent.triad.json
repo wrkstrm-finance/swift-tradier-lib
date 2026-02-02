@@ -1,0 +1,67 @@
+{
+  "contributionMix" : {
+    "primary" : [
+      {
+        "type" : "code",
+        "weight" : 4
+      },
+      {
+        "type" : "test",
+        "weight" : 3
+      },
+      {
+        "type" : "infra",
+        "weight" : 2
+      },
+      {
+        "type" : "doc",
+        "weight" : 1
+      }
+    ],
+    "secondary" : [
+      {
+        "type" : "tool",
+        "weight" : 1
+      }
+    ]
+  },
+  "guardrails" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "links" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "role" : "ios-engineer",
+  "schemaVersion" : "0.4.0",
+  "sections" : [
+    {
+      "items" : [
+        "**Role**: Implement features and tests for the TradierLib project.",
+        "**Reference**: Parent [ios-engineer.agent.triad.md](../../../../../../../../.clia/agents/ios-engineer/ios-engineer.agent.triad.md)."
+      ],
+      "kind" : "bullets",
+      "slug" : "ios-engineer-tradierlib",
+      "title" : "iOS Engineer — TradierLib"
+    }
+  ],
+  "slug" : "tradier-lib-ios-engineer",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/ios-engineer/tradier-lib-ios-engineer.agent.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "iOS Engineer — TradierLib",
+  "updated" : "2025-09-22T03:36:15Z"
+}

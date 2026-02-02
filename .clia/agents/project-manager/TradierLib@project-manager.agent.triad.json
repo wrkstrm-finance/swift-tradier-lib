@@ -1,0 +1,67 @@
+{
+  "contributionMix" : {
+    "primary" : [
+      {
+        "type" : "projectManagement",
+        "weight" : 4
+      },
+      {
+        "type" : "business",
+        "weight" : 2
+      },
+      {
+        "type" : "review",
+        "weight" : 2
+      },
+      {
+        "type" : "doc",
+        "weight" : 1
+      }
+    ],
+    "secondary" : [
+      {
+        "type" : "ideas",
+        "weight" : 1
+      }
+    ]
+  },
+  "guardrails" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "links" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "role" : "project-manager",
+  "schemaVersion" : "0.4.0",
+  "sections" : [
+    {
+      "items" : [
+        "**Role**: Coordinate milestones and risks for the TradierLib project.",
+        "**Reference**: Parent [project-manager.agent.triad.md](../../../../../../../../.clia/agents/project-manager/project-manager.agent.triad.md)."
+      ],
+      "kind" : "bullets",
+      "slug" : "project-manager-tradierlib",
+      "title" : "Project Manager — TradierLib"
+    }
+  ],
+  "slug" : "tradier-lib-project-manager",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/project-manager/tradier-lib-project-manager.agent.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "Project Manager — TradierLib",
+  "updated" : "2025-09-22T03:36:15Z"
+}

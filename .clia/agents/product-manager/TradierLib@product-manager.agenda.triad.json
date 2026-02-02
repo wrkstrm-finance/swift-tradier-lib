@@ -1,0 +1,75 @@
+{
+  "agent" : {
+    "role" : "product-manager"
+  },
+  "horizons" : [
+    {
+      "key" : "near",
+      "label" : "Near-Term"
+    },
+    {
+      "key" : "mid",
+      "label" : "Mid-Term"
+    },
+    {
+      "key" : "far",
+      "label" : "Long-Term"
+    }
+  ],
+  "links" : [
+
+  ],
+  "milestones" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "principles" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "schemaVersion" : "0.4.0",
+  "sections" : [
+    {
+      "items" : [
+        "\\- Maintain DocC parity across broker libs; ensure Services pages list top APIs. \\- Keep domain layout conventions stable to simplify OmniBroker adapters. \\- Add larger, realistic payloads (multi-quotes with greeks) to perf suite; persist CSV to artifacts directory in CI. \\- Add CLI wrapper to run perf outside XCTest and tag runs with build metadata."
+      ],
+      "kind" : "paragraphs",
+      "slug" : "near-term",
+      "title" : "Near-Term"
+    },
+    {
+      "items" : [
+        "\\- Release cadence and KPIs; add docbuild checks in CI. \\- Consider optional parser injection for auth flows to keep end-to-end consistency."
+      ],
+      "kind" : "paragraphs",
+      "slug" : "mid-term",
+      "title" : "Mid-Term"
+    },
+    {
+      "items" : [
+        "\\- Ecosystem adoption and partnerships."
+      ],
+      "kind" : "paragraphs",
+      "slug" : "long-term",
+      "title" : "Long-Term"
+    }
+  ],
+  "slug" : "tradier-lib-product-manager",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/product-manager/tradier-lib-product-manager.agenda.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "AGENDA — TradierLib Product Manager",
+  "updated" : "2025-09-22T03:36:15Z"
+}

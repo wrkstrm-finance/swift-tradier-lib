@@ -1,0 +1,49 @@
+{
+  "entries" : [
+    {
+      "details" : [
+        "2025-09-03 — Parity & Reference",
+        "Verified TradierLib’s domain structure and DocC catalog serve as the reference for broker libraries.",
+        "No structural changes required; captured conventions to guide PublicLib refactor and OmniBroker adapters."
+      ],
+      "summary" : "Seed: PJM-SPRINT initialization.",
+      "timestamp" : "2025-09-03",
+      "title" : "Agency Log — TradierLib Product Manager"
+    }
+  ],
+  "links" : [
+
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    },
+    {
+      "author" : "policy",
+      "blocks" : [
+        {
+          "kind" : "paragraph",
+          "text" : [
+            "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+          ]
+        }
+      ]
+    }
+  ],
+  "owners" : [
+
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-product-manager",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/product-manager/tradier-lib-product-manager.agency.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "Tradier Lib Product Manager Agency",
+  "updated" : "2025-09-22T03:36:15Z"
+}

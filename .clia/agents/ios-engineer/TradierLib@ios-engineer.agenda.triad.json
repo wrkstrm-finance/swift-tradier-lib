@@ -1,0 +1,63 @@
+{
+  "agent" : {
+    "role" : "ios-engineer"
+  },
+  "horizons" : [
+    {
+      "key" : "near",
+      "label" : "Near-Term"
+    },
+    {
+      "key" : "mid",
+      "label" : "Mid-Term"
+    },
+    {
+      "key" : "far",
+      "label" : "Long-Term"
+    }
+  ],
+  "links" : [
+
+  ],
+  "milestones" : [
+    {
+      "id" : "near-1",
+      "status" : "planned",
+      "title" : "REST client scaffolds and fixtures."
+    },
+    {
+      "id" : "mid-1",
+      "status" : "planned",
+      "title" : "Observability and error handling."
+    },
+    {
+      "id" : "far-1",
+      "status" : "planned",
+      "title" : "Stability, docs, and adoption."
+    }
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "principles" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-ios-engineer",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/ios-engineer/tradier-lib-ios-engineer.agenda.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "AGENDA — TradierLib iOS Engineer",
+  "updated" : "2025-09-22T03:36:15Z"
+}

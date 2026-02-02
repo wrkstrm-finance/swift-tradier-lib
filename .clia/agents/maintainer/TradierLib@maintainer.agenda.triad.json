@@ -1,0 +1,63 @@
+{
+  "agent" : {
+    "role" : "maintainer"
+  },
+  "horizons" : [
+    {
+      "key" : "near",
+      "label" : "Near-Term"
+    },
+    {
+      "key" : "mid",
+      "label" : "Mid-Term"
+    },
+    {
+      "key" : "far",
+      "label" : "Long-Term"
+    }
+  ],
+  "links" : [
+
+  ],
+  "milestones" : [
+    {
+      "id" : "near-1",
+      "status" : "planned",
+      "title" : "Define release checklist and CI gates."
+    },
+    {
+      "id" : "mid-1",
+      "status" : "planned",
+      "title" : "Deprecation policy and documentation."
+    },
+    {
+      "id" : "far-1",
+      "status" : "planned",
+      "title" : "Community support and security posture."
+    }
+  ],
+  "notes" : [
+    {
+      "author" : "",
+      "blocks" : [
+
+      ],
+      "date" : ""
+    }
+  ],
+  "owners" : [
+
+  ],
+  "principles" : [
+    "Automation: use Swift-based launchpad/scratch tools (SPM) and avoid Python for repository automation."
+  ],
+  "schemaVersion" : "0.4.0",
+  "slug" : "tradier-lib-maintainer",
+  "sourcePath" : "code/mono/apple/spm/universal/finance/TradierLib/.clia/agents/maintainer/tradier-lib-maintainer.agenda.triad.md",
+  "status" : "draft",
+  "tags" : [
+
+  ],
+  "title" : "AGENDA — TradierLib Maintainer",
+  "updated" : "2025-09-22T03:36:15Z"
+}

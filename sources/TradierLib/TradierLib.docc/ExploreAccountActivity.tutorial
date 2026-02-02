@@ -1,0 +1,87 @@
+@Tutorial(time: 10) {
+  @Intro(title: "Explore Account Activity and Gain/Loss") {
+    Pull account history for audits and compute realized performance with gain/loss endpoints.
+    Learn how to filter by type, paginate, and constrain by dates or symbol.
+  }
+
+  @Section(title: "Fetch account history") {
+    @ContentAndMedia {
+      Use ``Tradier.CodableService/accountHistory(for:start:end:type:)`` to retrieve
+      transactions and events over a date range. Filter by ``Tradier.HistoryEventType`` when needed.
+    }
+    @Steps {
+      @Step {
+        Get history for the last 7 days.
+
+        ```swift
+        import TradierLib
+
+        let service = Tradier.CodableService()
+        let accountId = "<account-id>"
+
+        let now = Date()
+        let weekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let events = try await service.accountHistory(for: accountId, start: weekAgo, end: now)
+        print("events: \(events.count)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Filter by event type") {
+    @ContentAndMedia {
+      Limit results to a specific type, like trades, dividends, or fees.
+    }
+    @Steps {
+      @Step {
+        Fetch only trade events.
+
+        ```swift
+        let tradesOnly = try await service.accountHistory(
+          for: accountId,
+          start: weekAgo,
+          end: now,
+          type: .trade
+        )
+        print("trades: \(tradesOnly.count)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Compute gain/loss") {
+    @ContentAndMedia {
+      Use ``Tradier.CodableService/accountGainLoss(for:page:limit:sortBy:sort:start:end:symbol:)``
+      to page through closed positions for realized P/L.
+    }
+    @Steps {
+      @Step {
+        Pull the first page of gain/loss and optionally filter by symbol.
+
+        ```swift
+        let closed = try await service.accountGainLoss(
+          for: accountId,
+          page: 1,
+          limit: 50,
+          sortBy: .closeDate,
+          sort: .desc,
+          start: weekAgo,
+          end: now,
+          symbol: nil
+        )
+        let realized = closed.reduce(0.0) { $0 + ($1.gainLoss ?? 0) }
+        print("realized P/L: \(realized)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Best practices") {
+    @ContentAndMedia {
+      - Avoid requesting large unbounded ranges; paginate where appropriate.
+      - Cache and incrementally update for daily workflows.
+      - Apply symbol filters for targeted audits and reporting.
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+@Tutorials(name: "TradierLib Tutorials") {
+  @Intro(title: "Build broker features quickly") {
+    Learn to fetch quotes, manage watchlists, and stream market events using TradierLib.
+  }
+
+  @Chapter(name: "Start Here") {
+    @TutorialReference(tutorial: "doc:BuildAQuickClient")
+  }
+
+  @Chapter(name: "Options") {
+    @TutorialReference(tutorial: "doc:ExploreOptions")
+  }
+
+  @Chapter(name: "Trading") {
+    @TutorialReference(tutorial: "doc:PlaceAndManageOrders")
+  }
+
+  @Chapter(name: "Activity") {
+    @TutorialReference(tutorial: "doc:ExploreAccountActivity")
+  }
+}

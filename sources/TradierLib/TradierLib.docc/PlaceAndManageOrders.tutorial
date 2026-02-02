@@ -1,0 +1,143 @@
+@Tutorial(time: 12) {
+  @Intro(title: "Place, Preview, Replace, and Cancel Orders") {
+    Learn safe order flows in TradierLib: preview an order, place it, adjust it,
+    and cancel it — with best‑practice guardrails to avoid mistakes in production.
+  }
+
+  @Section(title: "Before you trade") {
+    @ContentAndMedia {
+      - Use sandbox until your review process is complete.
+      - Validate symbols, quantities, and price bounds before sending.
+      - Consider tagging orders for auditability.
+    }
+  }
+
+  @Section(title: "Preview an order") {
+    @ContentAndMedia {
+      Use ``Tradier/PreviewOrderRequest`` to simulate order handling without execution.
+    }
+    @Steps {
+      @Step {
+        Build and send a preview request.
+
+        ```swift
+        import TradierLib
+
+        let service = Tradier.CodableService()
+        let accountId = "<account-id>"
+
+        let preview = Tradier.PreviewOrderRequest(
+          accountId: accountId,
+          symbol: "AAPL",
+          side: .buy,
+          quantity: 1,
+          type: .limit,
+          duration: .day,
+          price: 100.0,
+          tag: "demo"
+        )
+        let result = try await service.client.send(preview)
+        print(result.order.status)
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Place an order") {
+    @ContentAndMedia {
+      Call ``Tradier.CodableService/placeOrder(accountId:symbol:side:quantity:type:duration:price:)``
+      to submit an order to the brokerage.
+    }
+    @Steps {
+      @Step {
+        Place a limit order in the sandbox.
+
+        ```swift
+        let placed = try await service.placeOrder(
+          accountId: accountId,
+          symbol: "AAPL",
+          side: .buy,
+          quantity: 1,
+          type: .limit,
+          duration: .day,
+          price: 100.0
+        )
+        print("order id: \(placed.id) status: \(placed.status)")
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Replace an order") {
+    @ContentAndMedia {
+      Use ``Tradier/ReplaceOrderRequest`` to adjust price or quantity on an existing order.
+    }
+    @Steps {
+      @Step {
+        Replace an order by id.
+
+        ```swift
+        let replace = Tradier.ReplaceOrderRequest(
+          accountId: accountId,
+          orderId: String(placed.id),
+          quantity: 1,
+          price: 101.0
+        )
+        let replaced = try await service.client.send(replace)
+        print(replaced.order.status)
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Cancel an order") {
+    @ContentAndMedia {
+      Use ``Tradier/CancelOrderRequest`` to cancel an open order by id.
+    }
+    @Steps {
+      @Step {
+        Cancel by order id.
+
+        ```swift
+        let cancel = Tradier.CancelOrderRequest(accountId: accountId, orderId: String(placed.id))
+        let canceled = try await service.client.send(cancel)
+        print(canceled.order.status)
+        ```
+      }
+    }
+  }
+
+  @Section(title: "List and inspect orders") {
+    @ContentAndMedia {
+      Fetch orders with ``Tradier/AccountOrdersRequest`` or a single order
+      with ``Tradier/AccountOrderRequest``. Include tags for compliance.
+    }
+    @Steps {
+      @Step {
+        List and fetch detail.
+
+        ```swift
+        let list = Tradier.AccountOrdersRequest(accountId: accountId, filter: .intraday)
+        let orders = try await service.client.send(list)
+        print(orders.orders.count)
+
+        if let firstId = orders.orders.first?.id {
+          let one = Tradier.AccountOrderRequest(accountId: accountId, orderId: String(firstId), includeTags: true)
+          let detail = try await service.client.send(one)
+          print(detail.order.id, detail.order.status)
+        }
+        ```
+      }
+    }
+  }
+
+  @Section(title: "Best practices") {
+    @ContentAndMedia {
+      - Validate inputs and enforce price/quantity guards before sending.
+      - Use sandbox, feature flags, and explicit operator approvals for live trading.
+      - Tag orders for traceability; fetch with `includeTags=true`.
+      - Handle rate limits and retry with backoff where appropriate.
+    }
+  }
+}
+
