@@ -3,19 +3,19 @@ import Foundation
 import PackageDescription
 
 ConfigurationService.local.dependencies = [
-  .package(name: "wrkstrm-foundation", path: "../../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-foundation"),
+  .package(name: "wrkstrm-foundation", path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-foundation"),
   .package(
     name: "wrkstrm-networking",
-    path: "../../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-networking"
+    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-networking"
   ),
   .package(name: "common-log", path: "../../../../universal/domain/system/common-log"),
   .package(name: "common-broker", path: "../common-broker"),
   .package(
     name: "wrkstrm-main",
-    path: "../../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
+    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
   ),
-  .package(name: "NotionLib", path: "../../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
-  .package(name: "JSONParserAdapters", path: "../../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
+  .package(name: "NotionLib", path: "../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
+  .package(name: "JSONParserAdapters", path: "../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -30,11 +30,11 @@ ConfigurationService.remote.dependencies = [
   .package(name: "common-broker", path: "../common-broker"),
   .package(
     name: "wrkstrm-main",
-    path: "../../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
+    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
   ),
   // Temporary: NotionLib is local-only.
-  .package(name: "NotionLib", path: "../../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
-  .package(name: "JSONParserAdapters", path: "../../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
+  .package(name: "NotionLib", path: "../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
+  .package(name: "JSONParserAdapters", path: "../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
