@@ -2,20 +2,42 @@
 import Foundation
 import PackageDescription
 
+private func envBool(_ key: String) -> Bool {
+  guard let raw = ProcessInfo.processInfo.environment[key] else { return false }
+  switch raw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+  case "1", "true", "yes":
+    return true
+  default:
+    return false
+  }
+}
+
+private let packageDir: URL = URL(fileURLWithPath: #filePath)
+  .deletingLastPathComponent()
+
+private func resolvedPath(_ path: String) -> String {
+  if path.hasPrefix("/") { return path }
+  return packageDir.appendingPathComponent(path).standardizedFileURL.path
+}
+
+private let useLocalDeps: Bool = envBool("SPM_USE_LOCAL_DEPS")
+
+private func localOrRemote(path: String, url: String, from version: Version) -> Package.Dependency {
+  if useLocalDeps {
+    return .package(path: resolvedPath(path))
+  }
+  return .package(url: url, from: version)
+}
+
 ConfigurationService.local.dependencies = [
-  .package(name: "wrkstrm-foundation", path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-foundation"),
-  .package(
-    name: "wrkstrm-networking",
-    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-networking"
-  ),
-  .package(name: "common-log", path: "../../../../universal/domain/system/common-log"),
-  .package(name: "common-broker", path: "../common-broker"),
-  .package(
-    name: "wrkstrm-main",
-    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
-  ),
-  .package(name: "NotionLib", path: "../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
-  .package(name: "JSONParserAdapters", path: "../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-foundation")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-networking")),
+  .package(path: resolvedPath("../../../../../../../swift-universal/public/spm/universal/domain/system/common-log")),
+  .package(path: resolvedPath("../common-broker")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-main")),
+  // NotionLib lives in the wrkstrm mono tree (no standalone repo yet).
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/api/notion-lib")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -27,14 +49,11 @@ ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/wrkstrm/wrkstrm-foundation.git", from: "3.0.0"),
   .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.0"),
   .package(url: "https://github.com/swift-universal/common-log.git", from: "3.0.0"),
-  .package(name: "common-broker", path: "../common-broker"),
-  .package(
-    name: "wrkstrm-main",
-    path: "../../../../../../../wrkstrm/spm/universal/domain/system/wrkstrm-main"
-  ),
-  // Temporary: NotionLib is local-only.
-  .package(name: "NotionLib", path: "../../../../../../../wrkstrm/spm/universal/domain/finance/NotionLib"),
-  .package(name: "JSONParserAdapters", path: "../../../../../../../wrkstrm/spm/universal/domain/system/JSONParserAdapters"),
+  .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.0.0"),
+  .package(url: "https://github.com/wrkstrm/wrkstrm-main.git", from: "3.0.0"),
+  // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/api/notion-lib")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -65,7 +84,7 @@ let package = Package(
         .product(name: "WrkstrmFoundation", package: "wrkstrm-foundation"),
         .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
         .product(name: "CommonLog", package: "common-log"),
-        .product(name: "NotionLib", package: "NotionLib"),
+        .product(name: "NotionLib", package: "notion-lib"),
         .product(name: "WebSocketKit", package: "websocket-kit"),
         .product(name: "NIO", package: "swift-nio"),
         .product(name: "NIOHTTP1", package: "swift-nio"),
@@ -168,7 +187,9 @@ extension SwiftSetting {
 
 extension ProcessInfo {
   public static var useLocalDeps: Bool {
-    ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] == "true"
+    guard let raw = ProcessInfo.processInfo.environment["SPM_USE_LOCAL_DEPS"] else { return false }
+    let normalized = raw.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    return normalized == "1" || normalized == "true" || normalized == "yes"
   }
 }
 
