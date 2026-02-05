@@ -18,7 +18,7 @@ This page documents the local micro-benchmarks comparing Foundation's `JSONDecod
 ## How to Run
 
 ```bash
-cd orgs/swift-universal/public/spm/universal/domain/finance/swift-tradier-lib
+cd orgs/wrkstrm-finance/public/spm/universal/domain/finance/swift-tradier-lib
 swift test -q
 ```
 

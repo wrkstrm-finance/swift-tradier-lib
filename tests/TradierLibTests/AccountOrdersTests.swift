@@ -142,8 +142,6 @@ struct AccountOrdersTests {
       in: env,
       with: JSONEncoder.commonDateFormatting,
     )
-    let expectedURLString =
-      "https://sandbox.tradier.com/v1/accounts/123/orders/preview"
     let expectedQueryItems: Set<URLQueryItem> = [
       URLQueryItem(name: "class", value: "equity"),
       URLQueryItem(name: "duration", value: "day"),

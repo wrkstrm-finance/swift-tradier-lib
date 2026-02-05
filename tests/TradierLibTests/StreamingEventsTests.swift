@@ -19,7 +19,7 @@ struct StreamingEventsTests {
       #expect(quote.symbol == "AAPL")
 
     default:
-      #expect(false)
+      #expect(Bool(false))
     }
     await client.close()
   }
@@ -40,14 +40,14 @@ struct StreamingEventsTests {
       #expect(quote.symbol == "AAPL")
 
     default:
-      #expect(false)
+      #expect(Bool(false))
     }
     switch second {
     case .trade(let trade):
       #expect(trade.symbol == "AAPL")
 
     default:
-      #expect(false)
+      #expect(Bool(false))
     }
     await client.close()
   }
@@ -66,7 +66,7 @@ struct StreamingEventsTests {
       #expect(type == "mystery")
 
     default:
-      #expect(false)
+      #expect(Bool(false))
     }
     await client.close()
   }
