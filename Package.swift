@@ -47,9 +47,9 @@ ConfigurationService.local.dependencies = [
 
 ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/wrkstrm/wrkstrm-foundation.git", from: "3.0.0"),
-  .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.0"),
+  .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.3"),
   .package(url: "https://github.com/swift-universal/common-log.git", from: "3.0.0"),
-  .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.0"),
+  .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.3"),
   .package(url: "https://github.com/wrkstrm/wrkstrm-main.git", from: "3.0.0"),
   // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
@@ -165,7 +165,7 @@ let package = Package(
 
 @MainActor
 public struct ConfigurationService {
-  public static let version = "1.0.0"
+  public static let version = "0.2.2"
 
   public var swiftSettings: [SwiftSetting] = []
   var dependencies: [Package.Dependency] = []
