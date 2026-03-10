@@ -30,14 +30,14 @@ private func localOrRemote(path: String, url: String, from version: Version) -> 
 }
 
 ConfigurationService.local.dependencies = [
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-foundation")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-networking")),
-  .package(path: resolvedPath("../../../../../../../swift-universal/public/spm/universal/domain/system/common-log")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-foundation")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-networking")),
+  .package(path: resolvedPath("../../../../../../../swift-universal/private/universal/spm/domain/system/common-log")),
   .package(path: resolvedPath("../common-broker")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/wrkstrm-main")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-main")),
   // NotionLib lives in the wrkstrm mono tree (no standalone repo yet).
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/api/notion-lib")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/JSONParserAdapters")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -52,8 +52,8 @@ ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.0"),
   .package(url: "https://github.com/wrkstrm/wrkstrm-main.git", from: "3.0.0"),
   // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/api/notion-lib")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/spm/universal/domain/system/JSONParserAdapters")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
