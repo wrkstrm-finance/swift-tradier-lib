@@ -31,7 +31,7 @@ private func localOrRemote(path: String, url: String, from version: Version) -> 
 
 ConfigurationService.local.dependencies = [
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-foundation")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-networking")),
+  .package(path: resolvedPath("../../../../../../../wrkstrm/private/universal/spm/domain/system/wrkstrm-networking")),
   .package(path: resolvedPath("../../../../../../../swift-universal/private/universal/spm/domain/system/common-log")),
   .package(path: resolvedPath("../common-broker")),
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-main")),
