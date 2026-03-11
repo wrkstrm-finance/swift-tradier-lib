@@ -39,10 +39,14 @@ extension Tradier {
       decoder: any JSONDataDecoding,
       encoder: (any JSONDataEncoding)? = nil,
     ) {
-      let reqEncoder: any JSONDataEncoding = encoder ?? JSONEncoder.commonDateFormatting
+      let coding = HTTP.CodableClient.SendableJSONCoding(
+        requestEncoder: encoder ?? JSONEncoder.commonDateFormatting,
+        responseDecoder: decoder
+      )
       client = .init(
         environment: environment,
-        jsonCoding: (requestEncoder: reqEncoder, responseDecoder: decoder),
+        jsonCoding: coding,
+        transport: HTTP.URLSessionTransport(),
       )
     }
 
@@ -54,7 +58,15 @@ extension Tradier {
       environment: HTTP.Environment = HTTPSSandboxEnvironment(),
       jsonCoding: (requestEncoder: any JSONDataEncoding, responseDecoder: any JSONDataDecoding),
     ) {
-      client = .init(environment: environment, jsonCoding: jsonCoding)
+      let coding = HTTP.CodableClient.SendableJSONCoding(
+        requestEncoder: jsonCoding.requestEncoder,
+        responseDecoder: jsonCoding.responseDecoder
+      )
+      client = .init(
+        environment: environment,
+        jsonCoding: coding,
+        transport: HTTP.URLSessionTransport(),
+      )
     }
 
     /// Initializes using a JSON.Parser instance.
