@@ -53,7 +53,7 @@ ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.5"),
   .package(url: "https://github.com/swift-universal/swift-universal-foundation.git", from: "3.0.0"),
   .package(url: "https://github.com/swift-universal/common-log.git", from: "3.0.0"),
-  .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.3"),
+  .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.6"),
   .package(url: "https://github.com/swift-universal/swift-universal-main.git", from: "3.0.0"),
   // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),

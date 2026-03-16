@@ -1,19 +1,19 @@
 {
-  "originHash" : "6d59b1873ff8ea40d8637522d7654d5f2bcd0568a472546ca3114e62677a1dbc",
+  "originHash" : "18f5a810170b24e77e2b46bda7bf3dc0ab589fc2a192a88badc07cb4c26659ae",
   "pins" : [
     {
       "identity" : "common-broker",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wrkstrm-finance/common-broker.git",
       "state" : {
-        "revision" : "0f023b006948346a9880aa67c075419abad200fa",
-        "version" : "0.1.5"
+        "revision" : "f38eab245694ad991819dc5e8cb34692c0b93504",
+        "version" : "0.1.6"
       }
     },
     {
       "identity" : "common-broker-schemas-v000-001-000",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wrkstrm-finance/common-broker-schemas-v000-001-000.git",
+      "location" : "https://github.com/universal-schemas/common-broker-schemas-v000-001-000.git",
       "state" : {
         "revision" : "fd26901f6a7657c86edb732b652c917dc9158244",
         "version" : "0.1.1"
