@@ -72,7 +72,7 @@ func sandboxProfileService_maps_account_balances() async throws {
   let common = try await service.accountBalances(for: "ACC-1")
   #expect(common.cashAvailable == 1000)
   #expect(common.totalEquity == 5000)
-  #expect(common.maintenanceCall == 750)
+  #expect(common.maintenanceRequirement == 750)
   #expect(common.stockBuyingPower == 2000)
   #else
   return

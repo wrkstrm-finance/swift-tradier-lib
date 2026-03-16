@@ -21,7 +21,7 @@ func commonOptionQuote_adapts_from_tradier_quote() throws {
   #expect(cq.last == 5.55)
   #expect(cq.bid == 5.50)
   #expect(cq.ask == 5.60)
-  #expect(cq.strike == 180.0)
-  #expect(cq.optionType == "call")
+  #expect(cq.strikePrice == 180.0)
+  #expect(cq.optionKind == "call")
   #expect(cq.expirationDate != nil)
 }
