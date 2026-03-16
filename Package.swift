@@ -171,7 +171,7 @@ let package = Package(
 
 @MainActor
 public struct ConfigurationService {
-  public static let version = "0.2.2"
+  public static let version = "0.2.4"
 
   public var swiftSettings: [SwiftSetting] = []
   var dependencies: [Package.Dependency] = []
