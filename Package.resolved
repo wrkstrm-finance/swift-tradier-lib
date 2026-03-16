@@ -1,6 +1,33 @@
 {
-  "originHash" : "a449d3e77f3c8da934f447c91e9cc217413add06f2d904f98d49beff454428fa",
+  "originHash" : "6d59b1873ff8ea40d8637522d7654d5f2bcd0568a472546ca3114e62677a1dbc",
   "pins" : [
+    {
+      "identity" : "common-broker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wrkstrm-finance/common-broker.git",
+      "state" : {
+        "revision" : "0f023b006948346a9880aa67c075419abad200fa",
+        "version" : "0.1.5"
+      }
+    },
+    {
+      "identity" : "common-broker-schemas-v000-001-000",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wrkstrm-finance/common-broker-schemas-v000-001-000.git",
+      "state" : {
+        "revision" : "fd26901f6a7657c86edb732b652c917dc9158244",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "common-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-universal/common-log.git",
+      "state" : {
+        "revision" : "b6b85ee8004feef3ed83da224f933e99ffc91a81",
+        "version" : "3.0.4"
+      }
+    },
     {
       "identity" : "jjliso8601dateformatter",
       "kind" : "remoteSourceControl",
@@ -197,6 +224,15 @@
       "state" : {
         "revision" : "8666c92dbbb3c8eefc8008c9c8dcf50bfd302167",
         "version" : "2.16.1"
+      }
+    },
+    {
+      "identity" : "wrkstrm-networking",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wrkstrm/wrkstrm-networking.git",
+      "state" : {
+        "revision" : "3e9aa3b87018df77ed7aae8f0f170c535c1544e0",
+        "version" : "3.0.5"
       }
     },
     {

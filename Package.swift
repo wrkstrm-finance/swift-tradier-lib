@@ -30,11 +30,15 @@ private func localOrRemote(path: String, url: String, from version: Version) -> 
 }
 
 ConfigurationService.local.dependencies = [
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-foundation")),
   .package(path: resolvedPath("../../../../../../../wrkstrm/private/universal/spm/domain/system/wrkstrm-networking")),
+  .package(
+    path: resolvedPath("../../../../../../../swift-universal/private/universal/domain/system/spm/swift-universal-foundation")
+  ),
   .package(path: resolvedPath("../../../../../../../swift-universal/private/universal/spm/domain/system/common-log")),
   .package(path: resolvedPath("../common-broker")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/wrkstrm-main")),
+  .package(
+    path: resolvedPath("../../../../../../../swift-universal/private/universal/domain/system/spm/swift-universal-main")
+  ),
   // NotionLib lives in the wrkstrm mono tree (no standalone repo yet).
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
@@ -46,11 +50,11 @@ ConfigurationService.local.dependencies = [
 ]
 
 ConfigurationService.remote.dependencies = [
-  .package(url: "https://github.com/wrkstrm/wrkstrm-foundation.git", from: "3.0.0"),
-  .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.3"),
+  .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.5"),
+  .package(url: "https://github.com/swift-universal/swift-universal-foundation.git", from: "3.0.0"),
   .package(url: "https://github.com/swift-universal/common-log.git", from: "3.0.0"),
   .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.3"),
-  .package(url: "https://github.com/wrkstrm/wrkstrm-main.git", from: "3.0.0"),
+  .package(url: "https://github.com/swift-universal/swift-universal-main.git", from: "3.0.0"),
   // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
   .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
@@ -81,7 +85,8 @@ let package = Package(
     .target(
       name: "TradierLib",
       dependencies: [
-        .product(name: "WrkstrmFoundation", package: "wrkstrm-foundation"),
+        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
         .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
         .product(name: "CommonLog", package: "common-log"),
         .product(name: "NotionLib", package: "notion-lib"),
@@ -99,8 +104,8 @@ let package = Package(
       dependencies: [
         "TradierLib",
         .product(name: "CommonBroker", package: "common-broker"),
-        .product(name: "WrkstrmFoundation", package: "wrkstrm-foundation"),
-        .product(name: "WrkstrmMain", package: "wrkstrm-main"),
+        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
+        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
         .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
         .product(name: "CommonLog", package: "common-log"),
       ],
@@ -120,8 +125,9 @@ let package = Package(
       name: "TradierLibTests",
       dependencies: [
         "TradierLib",
-        .product(name: "WrkstrmFoundation", package: "wrkstrm-foundation"),
         .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
+        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
         .product(name: "CommonLog", package: "common-log"),
         .product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"),
       ],
@@ -151,8 +157,8 @@ let package = Package(
       dependencies: [
         "TradierLib",
         .product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"),
-        .product(name: "WrkstrmFoundation", package: "wrkstrm-foundation"),
-        .product(name: "WrkstrmMain", package: "wrkstrm-main"),
+        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
       path: "sources/TradierJSONPerfCLI",
