@@ -1,0 +1,21 @@
+name: "🎨 Format | TradierLib"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  swift-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build swift-format
+        run: |
+          git clone https://github.com/apple/swift-format.git /tmp/swift-format
+          swift build -c release --package-path /tmp/swift-format
+          sudo install /tmp/swift-format/.build/release/swift-format /usr/local/bin/swift-format
+      - name: Swift Format Lint
+        run: swift-format lint --recursive .

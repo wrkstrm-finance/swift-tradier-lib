@@ -1,0 +1,31 @@
+name: "🚦 Tests | TradierLib"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  swift-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Configure netrc for private deps
+        run: |
+          cat <<'EOF' >> $HOME/.netrc
+          machine github.com
+            login ${{ github.actor }}
+            password ${{ secrets.GITHUB_TOKEN }}
+          EOF
+          chmod 600 $HOME/.netrc
+      - name: Cache SPM dependencies
+        id: cache-spm
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-TradierLib-${{ hashFiles('**/Package.resolved', '**/Package.swift') }}
+          restore-keys: ${{ runner.os }}-spm-TradierLib-
+      - name: Swift Test
+        run: swift test --parallel

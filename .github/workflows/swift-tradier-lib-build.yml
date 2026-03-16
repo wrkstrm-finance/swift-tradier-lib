@@ -1,0 +1,38 @@
+name: "🏗️ Build | TradierLib"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths: ['**']
+jobs:
+  swift-build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Configure netrc for private deps
+        run: |
+          cat <<'EOF' >> $HOME/.netrc
+          machine github.com
+            login ${{ github.actor }}
+            password ${{ secrets.GITHUB_TOKEN }}
+          EOF
+          chmod 600 $HOME/.netrc
+      - name: Cache SPM dependencies
+        id: cache-spm
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-TradierLib-${{ hashFiles('**/Package.resolved', '**/Package.swift') }}
+          restore-keys: ${{ runner.os }}-spm-TradierLib-
+      - name: Swift Describe
+        if: steps.cache-spm.outputs.cache-hit != 'true'
+        run: swift package describe --type json
+      - name: Swift Build
+        run: swift build --target TradierLib
