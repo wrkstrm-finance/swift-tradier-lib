@@ -2,8 +2,8 @@ import ArgumentParser
 import Foundation
 import ReerJSONParserAdapter
 import TradierLib
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 
 // Benchmark JSON decoding throughput and emit CSV with metadata.
 // Example:

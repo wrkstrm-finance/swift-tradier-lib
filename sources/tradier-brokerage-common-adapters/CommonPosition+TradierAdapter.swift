@@ -16,8 +16,8 @@ extension CommonPosition {
       dateAcquired: position.dateAcquired,
       pricePaid: position.pricePaid,
       expirationDate: position.expirationDate,
-      strike: position.strike,
-      optionType: position.optionType,
+      strikePrice: position.strike,
+      optionKind: position.optionType,
       underlying: position.underlying,
     )
   }

@@ -1,5 +1,5 @@
 import Foundation
-import WrkstrmMain
+import SwiftUniversalMain
 
 extension Tradier {
   public struct GainLossRoot: Decodable, Sendable {

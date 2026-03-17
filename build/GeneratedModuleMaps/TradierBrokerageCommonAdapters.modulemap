@@ -1,0 +1,4 @@
+module TradierBrokerageCommonAdapters {
+header "TradierBrokerageCommonAdapters-Swift.h"
+export *
+}

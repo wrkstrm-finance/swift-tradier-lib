@@ -12,7 +12,7 @@ extension CommonClosedPosition {
       closeDate: cp.closeDate,
       cost: cp.cost,
       proceeds: cp.proceeds,
-      gainLossPercent: cp.gainLossPercent,
+      gainLossPercentage: cp.gainLossPercent,
       term: cp.term,
     )
   }

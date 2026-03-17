@@ -1,7 +1,7 @@
 #if canImport(CoreData)
 import CoreData
 import Foundation
-import WrkstrmFoundation
+import SwiftUniversalFoundation
 
 extension Managed.QuotesRoot {
   @MainActor

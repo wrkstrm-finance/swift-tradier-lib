@@ -1,5 +1,5 @@
 {
-  "originHash" : "18f5a810170b24e77e2b46bda7bf3dc0ab589fc2a192a88badc07cb4c26659ae",
+  "originHash" : "afbd3821cdf836278963020b64f96f8b447d50b4338c7ea278f43046e790f440",
   "pins" : [
     {
       "identity" : "common-broker",
@@ -215,6 +215,24 @@
       "state" : {
         "revision" : "890830fff1a577dc83134890c7984020c5f6b43b",
         "version" : "1.6.2"
+      }
+    },
+    {
+      "identity" : "swift-universal-foundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-universal/swift-universal-foundation.git",
+      "state" : {
+        "revision" : "ae86ac0c92937c1e1b7450f73cdcaee239188636",
+        "version" : "3.0.9"
+      }
+    },
+    {
+      "identity" : "swift-universal-main",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swift-universal/swift-universal-main.git",
+      "state" : {
+        "revision" : "9ecab44111ff413337e930e78329b54d40da5137",
+        "version" : "3.0.6"
       }
     },
     {

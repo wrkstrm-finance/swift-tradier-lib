@@ -1,8 +1,9 @@
 import Foundation
 import CommonBroker
 import TradierLib
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 
 public struct TradierProductionQuoteService: CommonQuoteService, CommonQuoteVariantService, Sendable
 {
@@ -14,8 +15,11 @@ public struct TradierProductionQuoteService: CommonQuoteService, CommonQuoteVari
     client = Tradier.CodableService(environment: environment)
   }
 
-  /// Instrumented initializer allowing a custom JSON parser.
-  public init(environment: Tradier.HTTPSProdEnvironment = .init(), parser: JSON.Parser) {
+  /// Instrumented initializer allowing a custom response decoder.
+  public init(
+    environment: Tradier.HTTPSProdEnvironment = .init(),
+    parser: any SwiftUniversalFoundation.JSONDataDecoding & Sendable
+  ) {
     client = Tradier.CodableService(environment: environment, json: parser)
   }
 

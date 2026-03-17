@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 
 @testable import TradierLib
 

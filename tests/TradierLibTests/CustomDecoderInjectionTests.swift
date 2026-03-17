@@ -1,7 +1,8 @@
 import Foundation
 import Testing
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 @testable import TradierLib
@@ -21,8 +22,8 @@ private struct FakeTransport: HTTP.Transport {
 }
 
 // Decoder that records decode calls and delegates to a real JSONDecoder.
-struct StubUserProfileDecoder: JSONDataDecoding {
-  let base: JSONDecoder = .commonDateParsing
+struct StubUserProfileDecoder: SwiftUniversalFoundation.JSONDataDecoding {
+  let base = JSONDecoder.commonDateParsing
   func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
     if type == Tradier.UserProfileRoot.self {
       let stub = Tradier.UserProfileRoot(

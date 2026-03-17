@@ -1,7 +1,7 @@
 import Foundation
-import WrkstrmFoundation
 import CommonLog
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 extension Tradier {
@@ -36,8 +36,8 @@ extension Tradier {
     ///   - encoder: Optional request encoder; defaults to `JSONEncoder.commonDateFormatting`.
     public init(
       environment: HTTP.Environment = HTTPSSandboxEnvironment(),
-      decoder: any JSONDataDecoding,
-      encoder: (any JSONDataEncoding)? = nil,
+      decoder: any SwiftUniversalFoundation.JSONDataDecoding,
+      encoder: (any SwiftUniversalFoundation.JSONDataEncoding)? = nil,
     ) {
       let coding = HTTP.CodableClient.SendableJSONCoding(
         requestEncoder: encoder ?? JSONEncoder.commonDateFormatting,
@@ -56,7 +56,10 @@ extension Tradier {
     ///   - jsonCoding: Tuple containing request encoder and response decoder.
     public init(
       environment: HTTP.Environment = HTTPSSandboxEnvironment(),
-      jsonCoding: (requestEncoder: any JSONDataEncoding, responseDecoder: any JSONDataDecoding),
+      jsonCoding: (
+        requestEncoder: any SwiftUniversalFoundation.JSONDataEncoding,
+        responseDecoder: any SwiftUniversalFoundation.JSONDataDecoding
+      ),
     ) {
       let coding = HTTP.CodableClient.SendableJSONCoding(
         requestEncoder: jsonCoding.requestEncoder,
@@ -69,12 +72,12 @@ extension Tradier {
       )
     }
 
-    /// Initializes using a JSON.Parser instance.
+    /// Initializes using a custom response decoder.
     public init(
       environment: HTTP.Environment = HTTPSSandboxEnvironment(),
-      json: JSON.Parser,
+      json: any SwiftUniversalFoundation.JSONDataDecoding & Sendable,
     ) {
-      client = HTTP.CodableClient(environment: environment, parser: json)
+      self.init(environment: environment, decoder: json)
     }
 
     // Domain methods moved to per-service extensions.

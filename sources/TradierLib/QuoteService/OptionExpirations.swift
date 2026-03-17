@@ -1,5 +1,5 @@
 import Foundation
-import WrkstrmFoundation
+import SwiftUniversalFoundation
 import WrkstrmNetworking
 
 public protocol QuoteService: Sendable {

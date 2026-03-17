@@ -3,7 +3,7 @@
 // Related: Quote+Codable.swift, CodableURLRequest+MarketData.swift
 import Foundation
 import CommonLog
-import WrkstrmMain
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 extension Tradier.CodableService {

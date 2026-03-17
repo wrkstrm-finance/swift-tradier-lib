@@ -22,4 +22,4 @@ struct Quote: Decodable {
 
 - Don’t rely on `.convertFromSnakeCase` / `.convertToSnakeCase` strategies.
 
-See: ../../../../WrkstrmFoundation/Sources/WrkstrmFoundation/Documentation.docc/AvoidSnakeCaseKeyStrategies.md
+See: ../../../../swift-universal-foundation/Sources/SwiftUniversalFoundation/Documentation.docc/AvoidSnakeCaseKeyStrategies.md

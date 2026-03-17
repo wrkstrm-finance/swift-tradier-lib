@@ -1,0 +1,4 @@
+module TradierLib {
+header "TradierLib-Swift.h"
+export *
+}

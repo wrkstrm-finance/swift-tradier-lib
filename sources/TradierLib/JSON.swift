@@ -1,5 +1,5 @@
 import Foundation
-import WrkstrmFoundation
+import SwiftUniversalFoundation
 
 extension Tradier {
   // MARK: - JSON Decoding

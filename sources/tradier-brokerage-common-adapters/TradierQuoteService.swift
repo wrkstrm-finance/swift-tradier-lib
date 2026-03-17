@@ -1,8 +1,9 @@
 import CommonBroker
 import Foundation
 import TradierLib
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 public protocol TradierQuoteClient: Sendable {
@@ -24,8 +25,11 @@ public struct TradierSandboxQuoteService: CommonQuoteService, CommonQuoteVariant
     client = Tradier.CodableService(environment: environment)
   }
 
-  /// Instrumented initializer allowing a custom JSON parser.
-  public init(environment: Tradier.HTTPSSandboxEnvironment = .init(), parser: JSON.Parser) {
+  /// Instrumented initializer allowing a custom response decoder.
+  public init(
+    environment: Tradier.HTTPSSandboxEnvironment = .init(),
+    parser: any SwiftUniversalFoundation.JSONDataDecoding & Sendable
+  ) {
     client = Tradier.CodableService(environment: environment, json: parser)
   }
 

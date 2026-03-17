@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-import WrkstrmFoundation
+import SwiftUniversalFoundation
 import WrkstrmNetworking
 
 @testable import TradierLib

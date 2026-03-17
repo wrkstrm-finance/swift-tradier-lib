@@ -1,8 +1,9 @@
 import Foundation
 import CommonBroker
 import TradierLib
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 extension CommonWatchlistItem {
@@ -41,8 +42,8 @@ public struct TradierWatchlistService: CommonWatchlistService, Sendable {
     }
   }
 
-  /// Instrumented initializer allowing a custom JSON parser.
-  public init(environment: HTTP.Environment, parser: JSON.Parser) {
+  /// Instrumented initializer allowing a custom response decoder.
+  public init(environment: HTTP.Environment, parser: any SwiftUniversalFoundation.JSONDataDecoding & Sendable) {
     client = Tradier.CodableService(environment: environment, json: parser)
     if environment is Tradier.HTTPSSandboxEnvironment {
       serviceType = .sandbox

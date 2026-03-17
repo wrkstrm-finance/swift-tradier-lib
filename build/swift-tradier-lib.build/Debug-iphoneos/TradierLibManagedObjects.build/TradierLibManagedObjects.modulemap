@@ -1,0 +1,4 @@
+module TradierLibManagedObjects {
+header "TradierLibManagedObjects-Swift.h"
+export *
+}

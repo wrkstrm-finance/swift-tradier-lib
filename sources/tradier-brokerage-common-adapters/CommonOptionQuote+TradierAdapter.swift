@@ -24,10 +24,10 @@ extension CommonOptionQuote {
         theta: g.theta,
         vega: g.vega,
         rho: g.rho,
-        iv: g.midIv,
-        bidIv: g.bidIv,
-        midIv: g.midIv,
-        askIv: g.askIv,
+        impliedVolatility: g.midIv,
+        bidImpliedVolatility: g.bidIv,
+        midImpliedVolatility: g.midIv,
+        askImpliedVolatility: g.askIv,
         updatedAt: g.updatedAt,
       )
     } else {
@@ -40,9 +40,9 @@ extension CommonOptionQuote {
       last: q.last,
       bid: q.bid,
       ask: q.ask,
-      strike: q.strike,
+      strikePrice: q.strike,
       expirationDate: expirationDate,
-      optionType: q.optionType,
+      optionKind: q.optionType,
       greeks: greeks,
     )
   }

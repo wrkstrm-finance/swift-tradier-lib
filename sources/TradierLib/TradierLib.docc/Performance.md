@@ -65,7 +65,7 @@ Create a `JSON.Parser` backed by ReerJSON via the adapter, and thread it into yo
 
 ```swift
 import ReerJSONParserAdapter
-import WrkstrmFoundation
+import SwiftUniversalFoundation
 
 let parser = ReerJSONParserAdapter.makeParser()
 // PublicLib

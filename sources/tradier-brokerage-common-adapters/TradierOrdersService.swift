@@ -1,15 +1,16 @@
 import Foundation
 import CommonBroker
 import TradierLib
-import WrkstrmFoundation
-import WrkstrmMain
+import SwiftUniversalFoundation
+import SwiftUniversalFoundation
+import SwiftUniversalMain
 import WrkstrmNetworking
 
 extension CommonOrder {
   public init(_ o: Tradier.Order) {
     self.init(
       id: o.id,
-      type: o.type,
+      orderType: o.type,
       symbol: o.symbol,
       side: o.side,
       quantity: o.quantity,
@@ -38,8 +39,8 @@ public struct TradierOrdersService: CommonOrdersService, Sendable {
     }
   }
 
-  /// Instrumented initializer allowing a custom JSON parser.
-  public init(environment: HTTP.Environment, parser: JSON.Parser) {
+  /// Instrumented initializer allowing a custom response decoder.
+  public init(environment: HTTP.Environment, parser: any SwiftUniversalFoundation.JSONDataDecoding & Sendable) {
     client = Tradier.CodableService(environment: environment, json: parser)
     if environment is Tradier.HTTPSSandboxEnvironment {
       serviceType = .sandbox
