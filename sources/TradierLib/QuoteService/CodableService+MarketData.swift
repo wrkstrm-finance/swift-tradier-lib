@@ -1,13 +1,13 @@
 // Overview: Per-domain market data methods for Tradier.CodableService.
 // Provides quotes, time sales, options, and market calendar APIs.
-// Related: Quote+Codable.swift, CodableURLRequest+MarketData.swift
+// Related: TradierBrokerageQuoteModel+Codable.swift, CodableURLRequest+MarketData.swift
 import Foundation
 import CommonLog
 import SwiftUniversalMain
 import WrkstrmNetworking
 
 extension Tradier.CodableService {
-  public func quote(for symbol: String) async throws -> Tradier.Quote {
+  public func quote(for symbol: String) async throws -> Tradier.TradierBrokerageQuoteModel {
     /// Returns the latest quote for a single symbol.
     let request: Tradier.QuoteRequest = .init(symbol: symbol)
     let response = try await client.send(request)
@@ -18,20 +18,20 @@ extension Tradier.CodableService {
     return quote
   }
 
-  public func quotes(for symbols: [String]) async throws -> [Tradier.Quote] {
+  public func quotes(for symbols: [String]) async throws -> [Tradier.TradierBrokerageQuoteModel] {
     /// Returns the latest quotes for multiple symbols.
     let request: Tradier.MultiQuotesRequest = .init(
       symbols: symbols,
       greeks: false,
     )
-    let result: Tradier.MultiQuotesRoot = try await client.send(request)
+    let result: Tradier.TradierBrokerageMultiQuotesRootModel = try await client.send(request)
     guard let quotes = result.quotes?.quote else {
       throw StringError("No quotes found.")
     }
     return quotes
   }
 
-  public func clock() async throws -> Tradier.Clock {
+  public func clock() async throws -> Tradier.TradierBrokerageClockModel {
     /// Fetches the market clock (open/close status and times).
     let request: Tradier.ClockRequest = .init()
     return try await client.send(request).clock
@@ -40,7 +40,7 @@ extension Tradier.CodableService {
   public func timeSales(
     for symbol: String,
     interval: Tradier.Interval,
-  ) async throws -> [Tradier.TimeSale] {
+  ) async throws -> [Tradier.TradierBrokerageTimeSaleModel] {
     /// Retrieves time and sales series for a symbol at the requested interval.
     let request: Tradier.TimeSalesRequest = .init(symbol: symbol, interval: interval)
     return try await client.send(request).series.data
@@ -75,7 +75,7 @@ extension Tradier.CodableService {
     kind: Option.Kind,
     maxStrikes: Int = 5,
     includeGreeks: Bool = true,
-  ) async throws -> [Tradier.Quote] {
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel] {
     /// Fetches quotes for a subset of strikes at a given expiration and kind.
     let formatter: DateFormatter = .init()
     formatter.calendar = Calendar(identifier: .gregorian)
@@ -99,7 +99,7 @@ extension Tradier.CodableService {
       symbols: symbols,
       greeks: includeGreeks,
     )
-    let result: Tradier.MultiQuotesRoot = try await client.send(request)
+    let result: Tradier.TradierBrokerageMultiQuotesRootModel = try await client.send(request)
     guard let quotes = result.quotes?.quote else {
       throw StringError("No option quote in quotes.")
     }
@@ -110,7 +110,7 @@ extension Tradier.CodableService {
     for root: String,
     expiration: Option.Expiration,
     includeGreeks: Bool = true,
-  ) async throws -> [Tradier.Quote] {
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel] {
     /// Fetches the full option chain for a root and expiration.
     let request = Tradier.OptionChainRequest(
       symbol: root,
@@ -123,7 +123,7 @@ extension Tradier.CodableService {
   public func marketCalendar(
     month: Int,
     year: Int,
-  ) async throws -> [Tradier.MarketCalendarRoot.Day] {
+  ) async throws -> [Tradier.TradierBrokerageMarketCalendarRootModel.TradierBrokerageMarketCalendarDayModel] {
     /// Gets the market calendar for a given month and year.
     let request: Tradier.MarketCalendarRequest = .init(month: month, year: year)
     return try await client.send(request).calendar.days.day

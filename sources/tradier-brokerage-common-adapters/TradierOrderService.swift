@@ -59,7 +59,7 @@ public struct TradierOrderService: CommonOrderService, Sendable {
       duration: mapOrderDuration(duration),
       price: price,
     )
-    let resp: Tradier.OrderResultRoot = try await sender.send(request)
+    let resp: Tradier.TradierBrokerageOrderResultRootModel = try await sender.send(request)
     return CommonOrderResult(resp.order)
   }
 
@@ -81,7 +81,7 @@ public struct TradierOrderService: CommonOrderService, Sendable {
       duration: mapOrderDuration(duration),
       price: price,
     )
-    let resp: Tradier.OrderResultRoot = try await sender.send(request)
+    let resp: Tradier.TradierBrokerageOrderResultRootModel = try await sender.send(request)
     return CommonOrderResult(resp.order)
   }
 
@@ -99,7 +99,7 @@ public struct TradierOrderService: CommonOrderService, Sendable {
       price: price,
       stop: stop,
     )
-    let resp: Tradier.OrderResultRoot = try await sender.send(req)
+    let resp: Tradier.TradierBrokerageOrderResultRootModel = try await sender.send(req)
     return CommonOrderResult(resp.order)
   }
 
@@ -108,14 +108,14 @@ public struct TradierOrderService: CommonOrderService, Sendable {
     orderId: String,
   ) async throws -> CommonOrderResult {
     let req = Tradier.CancelOrderRequest(accountId: accountId, orderId: orderId)
-    let resp: Tradier.OrderResultRoot = try await sender.send(req)
+    let resp: Tradier.TradierBrokerageOrderResultRootModel = try await sender.send(req)
     return CommonOrderResult(resp.order)
   }
 
-  public func orderStatus(accountId: String, orderId: String) async throws -> CommonOrder {
+  public func orderStatus(accountId: String, orderId: String) async throws -> CommonBrokerageOrderModel {
     let req = Tradier.AccountOrderRequest(accountId: accountId, orderId: orderId)
-    let resp: Tradier.OrderRoot = try await sender.send(req)
-    return CommonOrder(resp.order)
+    let resp: Tradier.TradierBrokerageOrderRootModel = try await sender.send(req)
+    return CommonBrokerageOrderModel(resp.order)
   }
 }
 

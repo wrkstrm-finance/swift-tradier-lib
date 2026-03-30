@@ -1,11 +1,11 @@
 import Foundation
 
 extension Tradier {
-  public struct ClockRoot: Decodable, Sendable {
-    public var clock: Clock
+  public struct TradierBrokerageClockRootModel: Decodable, Sendable {
+    public var clock: TradierBrokerageClockModel
   }
 
-  public struct Clock: Decodable, Sendable {
+  public struct TradierBrokerageClockModel: Decodable, Sendable {
     public var date: String
     public var description: String
     public var state: ClockState

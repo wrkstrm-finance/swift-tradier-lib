@@ -2,11 +2,11 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonActivityEvent {
-  public init(_ tx: Tradier.Transaction) {
-    let trade: CommonTradeEvent?
+extension CommonBrokerageActivityEventModel {
+  public init(_ tx: Tradier.TradierBrokerageTransactionModel) {
+    let trade: CommonBrokerageTradeEventModel?
     if let t = tx.trade {
-      trade = CommonTradeEvent(
+      trade = CommonBrokerageTradeEventModel(
         commission: t.commission,
         description: t.description,
         price: t.price,
@@ -18,16 +18,16 @@ extension CommonActivityEvent {
       trade = nil
     }
 
-    let ach: CommonACHEvent?
+    let ach: CommonBrokerageACHEventModel?
     if let a = tx.ach {
-      ach = CommonACHEvent(description: a.description, quantity: a.quantity)
+      ach = CommonBrokerageACHEventModel(description: a.description, quantity: a.quantity)
     } else {
       ach = nil
     }
 
-    let transfer: CommonTransferEvent?
+    let transfer: CommonBrokerageTransferEventModel?
     if let tr = tx.transfer {
-      transfer = CommonTransferEvent(description: tr.description, quantity: tr.quantity)
+      transfer = CommonBrokerageTransferEventModel(description: tr.description, quantity: tr.quantity)
     } else {
       transfer = nil
     }

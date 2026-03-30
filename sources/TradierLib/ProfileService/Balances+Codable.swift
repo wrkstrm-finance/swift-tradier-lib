@@ -1,11 +1,11 @@
 import Foundation
 
 extension Tradier {
-  public struct BalancesRoot: Decodable, Sendable {
-    public var balances: Balance
+  public struct TradierBrokerageBalancesRootModel: Decodable, Sendable {
+    public var balances: TradierBrokerageBalanceModel
   }
 
-  public struct Balance: Decodable, Sendable {
+  public struct TradierBrokerageBalanceModel: Decodable, Sendable {
     public var accountNumber: String?
     public var accountType: String?
     public var totalCash: Double?
@@ -15,8 +15,8 @@ extension Tradier {
     public var closePl: Double?
     public var openPl: Double?
     public var pendingOrdersCount: Int?
-    public var margin: MarginBalance?
-    public var cash: CashBalance?
+    public var margin: TradierBrokerageMarginBalanceModel?
+    public var cash: TradierBrokerageCashBalanceModel?
 
     private enum CodingKeys: String, CodingKey {
       case accountNumber = "account_number"
@@ -32,7 +32,7 @@ extension Tradier {
     }
   }
 
-  public struct MarginBalance: Decodable, Sendable {
+  public struct TradierBrokerageMarginBalanceModel: Decodable, Sendable {
     public var fedCall: Double?
     public var maintenanceCall: Double?
     public var stockBuyingPower: Double?
@@ -46,7 +46,7 @@ extension Tradier {
     }
   }
 
-  public struct CashBalance: Decodable, Sendable {
+  public struct TradierBrokerageCashBalanceModel: Decodable, Sendable {
     public var cashAvailable: Double?
     public var unsettledFunds: Double?
     public var sweep: Double?

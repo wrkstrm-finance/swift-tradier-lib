@@ -7,14 +7,14 @@ import TradierLib
 @Test
 func commonOptionQuote_adapts_from_tradier_quote() throws {
   let symbol = "AAPL250117C00180000"
-  var q: Tradier.Quote = try TestDecodeHelper.makeTradierQuote(symbol: symbol, last: 5.55)
+  var q: Tradier.TradierBrokerageQuoteModel = try TestDecodeHelper.makeTradierQuote(symbol: symbol, last: 5.55)
   q.underlying = "AAPL"
   q.bid = 5.50
   q.ask = 5.60
   q.strike = 180.0
   q.expirationDate = "2025-01-17"
   q.optionType = "call"
-  let cq = CommonOptionQuote(q)
+  let cq = CommonBrokerageOptionQuoteModel(q)
 
   #expect(cq.symbol == symbol)
   #expect(cq.underlying == "AAPL")

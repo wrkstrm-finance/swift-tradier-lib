@@ -4,8 +4,8 @@ import Foundation
 
 extension TradierTradeStreamService {
   /// Event emitted by the account streaming endpoint (e.g., fills).
-  public struct AccountEvent: Decodable {
+  public struct TradierBrokerageAccountEventModel: Decodable {
     public let type: String
-    public let transaction: Tradier.Transaction?
+    public let transaction: Tradier.TradierBrokerageTransactionModel?
   }
 }

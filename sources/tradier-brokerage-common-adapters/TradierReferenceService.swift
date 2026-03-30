@@ -6,8 +6,8 @@ import SwiftUniversalFoundation
 import SwiftUniversalMain
 import WrkstrmNetworking
 
-extension CommonSymbol {
-  init(_ s: Tradier.Security) {
+extension CommonBrokerageSymbolModel {
+  init(_ s: Tradier.TradierBrokerageSecurityModel) {
     self.init(
       symbol: s.symbol,
       name: s.description,
@@ -48,8 +48,8 @@ public struct TradierReferenceService: CommonReferenceService, Sendable {
     }
   }
 
-  public func searchSymbols(_ query: String) async throws -> [CommonSymbol] {
-    let results: [Tradier.Security] = try await client.symbolLookup(query: query)
-    return results.map(CommonSymbol.init)
+  public func searchSymbols(_ query: String) async throws -> [CommonBrokerageSymbolModel] {
+    let results: [Tradier.TradierBrokerageSecurityModel] = try await client.symbolLookup(query: query)
+    return results.map(CommonBrokerageSymbolModel.init)
   }
 }

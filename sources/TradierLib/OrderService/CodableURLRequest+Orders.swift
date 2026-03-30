@@ -7,7 +7,7 @@ import WrkstrmNetworking
 
 extension Tradier {
   public struct AccountOrdersRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrdersRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrdersRootModel
     public var method: HTTP.Method { .get }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/orders" }
@@ -42,7 +42,7 @@ extension Tradier {
   }
 
   public struct AccountOrderRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrderRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrderRootModel
     public var method: HTTP.Method { .get }
     public var accountId: String
     public var orderId: String

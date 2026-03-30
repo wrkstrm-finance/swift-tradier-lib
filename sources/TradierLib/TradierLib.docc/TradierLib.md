@@ -17,34 +17,34 @@ real-time market streaming.
 
 - ``Tradier.CodableService``
 - ``Tradier.Interval``
-- ``Tradier.Quote``
-- ``Tradier.Series``
-- ``Tradier.TimeSale``
+- ``Tradier.TradierBrokerageQuoteModel``
+- ``Tradier.TradierBrokerageTimeSeriesModel``
+- ``Tradier.TradierBrokerageTimeSaleModel``
 - ``Option``
 - <doc:ExploreOptions>
 
 ### Watchlists
 
-- ``Tradier.Watchlist``
-- ``Tradier.WatchlistsRoot``
+- ``Tradier.TradierBrokerageWatchlistModel``
+- ``Tradier.TradierBrokerageWatchlistsRootModel``
 
 ### Profiles & Balances
 
-- ``Tradier.UserProfile``
-- ``Tradier.AccountProfile``
-- ``Tradier.Balance``
+- ``Tradier.TradierBrokerageUserProfileRootModel``
+- ``Tradier.TradierBrokerageProfileRootModel``
+- ``Tradier.TradierBrokerageBalancesRootModel``
 
 ### Positions & Activity
 
-- ``Tradier.Position``
-- ``Tradier.Transaction``
-- ``Tradier.ClosedPosition``
+- ``Tradier.TradierBrokeragePositionModel``
+- ``Tradier.TradierBrokerageTransactionModel``
+- ``Tradier.TradierBrokerageClosedPositionModel``
 - <doc:ExploreAccountActivity>
 
 ### Orders
 
-- ``Tradier.Order``
-- ``Tradier.OrderResult``
+- ``Tradier.TradierBrokerageOrderModel``
+- ``Tradier.TradierBrokerageOrderResultModel``
 - <doc:PlaceAndManageOrders>
 
 ### Streaming
@@ -52,11 +52,11 @@ real-time market streaming.
 - ``TradierEventsClient``
 - ``TradierStreamOptions``
 - ``TradierEvent``
-- ``Quote``
-- ``Trade``
-- ``Summary``
-- ``TimeSale``
-- ``TradeX``
+- ``TradierBrokerageQuoteModel``
+- ``TradierBrokerageTradeModel``
+- ``TradierBrokerageSummaryModel``
+- ``TradierBrokerageTimeSaleModel``
+- ``TradierBrokerageTradeXModel``
 
 ### Performance
 

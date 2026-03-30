@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonOptionQuote {
-  public init(_ q: Tradier.Quote) {
+extension CommonBrokerageOptionQuoteModel {
+  public init(_ q: Tradier.TradierBrokerageQuoteModel) {
     let expirationDate: Date?
     // Parse ISO yyyy-MM-dd expiration if present
     if let s = q.expirationDate {
@@ -16,9 +16,9 @@ extension CommonOptionQuote {
     } else {
       expirationDate = nil
     }
-    let greeks: Greeks?
+    let greeks: CommonBrokerageOptionGreeksModel?
     if let g = q.greeks {
-      greeks = Greeks(
+      greeks = CommonBrokerageOptionGreeksModel(
         delta: g.delta,
         gamma: g.gamma,
         theta: g.theta,

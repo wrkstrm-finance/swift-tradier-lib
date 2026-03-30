@@ -3,7 +3,7 @@ import WrkstrmNetworking
 
 extension Tradier {
   public struct PlaceOrderRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrderResultRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrderResultRootModel
     public var method: HTTP.Method { .post }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/orders" }
@@ -57,7 +57,7 @@ extension Tradier {
   }
 
   public struct PreviewOrderRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrderResultRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrderResultRootModel
     public var method: HTTP.Method { .post }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/orders/preview" }
@@ -91,7 +91,7 @@ extension Tradier {
   }
 
   public struct ReplaceOrderRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrderResultRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrderResultRootModel
     public var method: HTTP.Method { .put }
     public var accountId: String
     public var orderId: String
@@ -116,7 +116,7 @@ extension Tradier {
   }
 
   public struct CancelOrderRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.OrderResultRoot
+    public typealias ResponseType = Tradier.TradierBrokerageOrderResultRootModel
     public var method: HTTP.Method { .delete }
     public var accountId: String
     public var orderId: String

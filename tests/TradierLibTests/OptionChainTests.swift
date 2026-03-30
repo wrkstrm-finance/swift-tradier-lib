@@ -80,7 +80,7 @@ struct OptionChainTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded = try Tradier.decoder.decode(Tradier.OptionChainRoot.self, from: json)
+    let decoded = try Tradier.decoder.decode(Tradier.TradierBrokerageOptionChainRootModel.self, from: json)
     let option = try #require(decoded.options.option.first)
     let greeks = try #require(option.greeks)
     #expect(greeks.delta == 1.0)

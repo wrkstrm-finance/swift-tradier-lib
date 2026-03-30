@@ -34,8 +34,8 @@ struct UserProfileTests {
   @Test
   func decodesData() throws {
     let json: Data = try Bundle.module.json(named: "user_profile_full")
-    let decoded: Tradier.UserProfileRoot = try Tradier.decoder.decode(
-      Tradier.UserProfileRoot.self,
+    let decoded: Tradier.TradierBrokerageUserProfileRootModel = try Tradier.decoder.decode(
+      Tradier.TradierBrokerageUserProfileRootModel.self,
       from: json,
     )
     #expect(decoded.profile.accounts.count == 2)

@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonAccountBalance {
-  public init(_ tradierBalance: Tradier.Balance) {
+extension CommonBrokerageAccountBalanceModel {
+  public init(_ tradierBalance: Tradier.TradierBrokerageBalanceModel) {
     self.init(
       accountNumber: tradierBalance.accountNumber,
       accountType: tradierBalance.accountType,

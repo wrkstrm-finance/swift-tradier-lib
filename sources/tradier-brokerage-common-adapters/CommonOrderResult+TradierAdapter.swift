@@ -3,7 +3,7 @@ import CommonBroker
 import TradierLib
 
 extension CommonOrderResult {
-  public init(_ result: Tradier.OrderResult) {
+  public init(_ result: Tradier.TradierBrokerageOrderResultModel) {
     self.init(
       id: result.id,
       status: result.status,

@@ -18,8 +18,8 @@ extension CommonMarketState {
   }
 }
 
-extension CommonMarketClock {
-  init(_ c: Tradier.Clock) {
+extension CommonBrokerageMarketClockModel {
+  init(_ c: Tradier.TradierBrokerageClockModel) {
     self.init(
       date: c.date,
       description: c.description,
@@ -31,27 +31,27 @@ extension CommonMarketClock {
   }
 }
 
-extension CommonMarketSession {
-  init(_ s: Tradier.MarketCalendarRoot.Session) {
+extension CommonBrokerageMarketSessionModel {
+  init(_ s: Tradier.TradierBrokerageMarketCalendarRootModel.TradierBrokerageMarketCalendarSessionModel) {
     self.init(start: s.start, end: s.end)
   }
 }
 
-extension CommonMarketDay {
-  init(_ d: Tradier.MarketCalendarRoot.Day) {
+extension CommonBrokerageMarketDayModel {
+  init(_ d: Tradier.TradierBrokerageMarketCalendarRootModel.TradierBrokerageMarketCalendarDayModel) {
     self.init(
       date: d.date,
       status: d.status,
       description: d.description,
-      premarket: d.premarket.map(CommonMarketSession.init),
-      open: d.open.map(CommonMarketSession.init),
-      postmarket: d.postmarket.map(CommonMarketSession.init),
+      premarket: d.premarket.map(CommonBrokerageMarketSessionModel.init),
+      open: d.open.map(CommonBrokerageMarketSessionModel.init),
+      postmarket: d.postmarket.map(CommonBrokerageMarketSessionModel.init),
     )
   }
 }
 
-extension CommonTimeSale {
-  init(_ t: Tradier.TimeSale) {
+extension CommonBrokerageTimeSaleModel {
+  init(_ t: Tradier.TradierBrokerageTimeSaleModel) {
     self.init(
       time: t.time,
       timestamp: t.timestamp,
@@ -107,23 +107,23 @@ public struct TradierMarketService: CommonMarketService, Sendable {
     }
   }
 
-  public func clock() async throws -> CommonMarketClock {
-    let c: Tradier.Clock = try await client.clock()
+  public func clock() async throws -> CommonBrokerageMarketClockModel {
+    let c: Tradier.TradierBrokerageClockModel = try await client.clock()
     return .init(c)
   }
 
-  public func calendar(month: Int, year: Int) async throws -> [CommonMarketDay] {
-    let days: [Tradier.MarketCalendarRoot.Day] = try await client.marketCalendar(
+  public func calendar(month: Int, year: Int) async throws -> [CommonBrokerageMarketDayModel] {
+    let days: [Tradier.TradierBrokerageMarketCalendarRootModel.TradierBrokerageMarketCalendarDayModel] = try await client.marketCalendar(
       month: month,
       year: year,
     )
-    return days.map(CommonMarketDay.init)
+    return days.map(CommonBrokerageMarketDayModel.init)
   }
 
-  public func timeSales(symbol: String, interval: CommonInterval) async throws -> [CommonTimeSale] {
-    let sales: [Tradier.TimeSale] = try await client.timeSales(
+  public func timeSales(symbol: String, interval: CommonInterval) async throws -> [CommonBrokerageTimeSaleModel] {
+    let sales: [Tradier.TradierBrokerageTimeSaleModel] = try await client.timeSales(
       for: symbol, interval: interval.tradier,
     )
-    return sales.map(CommonTimeSale.init)
+    return sales.map(CommonBrokerageTimeSaleModel.init)
   }
 }

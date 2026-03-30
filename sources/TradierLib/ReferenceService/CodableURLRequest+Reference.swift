@@ -3,7 +3,7 @@ import WrkstrmNetworking
 
 extension Tradier {
   public struct SymbolLookupRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.LookupRoot
+    public typealias ResponseType = Tradier.TradierBrokerageLookupRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/lookup" }
     public var options: HTTP.Request.Options

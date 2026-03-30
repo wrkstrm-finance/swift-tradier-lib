@@ -45,19 +45,19 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
     func detect(_ name: String, data: Data) -> Any? {
       switch true {
       case name.contains("user_profile"):
-        Payload(name: name, data: data, type: Tradier.UserProfileRoot.self)
+        Payload(name: name, data: data, type: Tradier.TradierBrokerageUserProfileRootModel.self)
 
       case name.contains("positions"):
-        Payload(name: name, data: data, type: Tradier.PositionsRoot.self)
+        Payload(name: name, data: data, type: Tradier.TradierBrokeragePositionsRootModel.self)
 
       case name.contains("option_expirations"):
-        Payload(name: name, data: data, type: Tradier.OptionExpirationsRoot.self)
+        Payload(name: name, data: data, type: Tradier.TradierBrokerageOptionExpirationsRootModel.self)
 
       case name.contains("quotes"):
-        Payload(name: name, data: data, type: Tradier.SingleQuoteRoot.self)
+        Payload(name: name, data: data, type: Tradier.TradierBrokerageSingleQuoteRootModel.self)
 
       case name.contains("option_chain"):
-        Payload(name: name, data: data, type: Tradier.OptionChainRoot.self)
+        Payload(name: name, data: data, type: Tradier.TradierBrokerageOptionChainRootModel.self)
       default: nil
       }
     }
@@ -127,15 +127,15 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
     }
 
     for anyP in payloads {
-      if let p = anyP as? Payload<Tradier.UserProfileRoot> {
+      if let p = anyP as? Payload<Tradier.TradierBrokerageUserProfileRootModel> {
         report(p)
-      } else if let p = anyP as? Payload<Tradier.PositionsRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokeragePositionsRootModel> {
         report(p)
-      } else if let p = anyP as? Payload<Tradier.OptionExpirationsRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageOptionExpirationsRootModel> {
         report(p)
-      } else if let p = anyP as? Payload<Tradier.SingleQuoteRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageSingleQuoteRootModel> {
         report(p)
-      } else if let p = anyP as? Payload<Tradier.OptionChainRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageOptionChainRootModel> {
         report(p)
       }
     }

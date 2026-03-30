@@ -1,13 +1,13 @@
 // Overview: Activity and gain/loss requests for accounts.
 // GET /accounts/{accountId}/history and /gainloss
-// Related: History+Codable.swift, GainLoss+Codable.swift
+// Related: TradierBrokerageHistoryModel+Codable.swift, TradierBrokerageGainLossModel+Codable.swift
 import Foundation
 import CommonLog
 import WrkstrmNetworking
 
 extension Tradier {
   public struct AccountHistoryRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.HistoryRoot
+    public typealias ResponseType = Tradier.TradierBrokerageHistoryRootModel
     public var method: HTTP.Method { .get }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/history" }
@@ -29,7 +29,7 @@ extension Tradier {
   }
 
   public struct AccountGainLossRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.GainLossRoot
+    public typealias ResponseType = Tradier.TradierBrokerageGainLossRootModel
     public var method: HTTP.Method { .get }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/gainloss" }

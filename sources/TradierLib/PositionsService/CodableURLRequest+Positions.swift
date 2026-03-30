@@ -1,13 +1,13 @@
-// Overview: Positions request for accounts.
+// Overview: TradierBrokeragePositionsModel request for accounts.
 // GET /accounts/{accountId}/positions
-// Related: Positions+Codable.swift
+// Related: TradierBrokeragePositionsModel+Codable.swift
 import Foundation
 import CommonLog
 import WrkstrmNetworking
 
 extension Tradier {
   public struct AccountPositionsRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.PositionsRoot
+    public typealias ResponseType = Tradier.TradierBrokeragePositionsRootModel
     public var method: HTTP.Method { .get }
     public var accountId: String
     public var path: String { "accounts/\(accountId)/positions" }

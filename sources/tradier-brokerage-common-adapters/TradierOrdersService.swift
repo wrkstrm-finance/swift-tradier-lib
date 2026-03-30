@@ -6,8 +6,8 @@ import SwiftUniversalFoundation
 import SwiftUniversalMain
 import WrkstrmNetworking
 
-extension CommonOrder {
-  public init(_ o: Tradier.Order) {
+extension CommonBrokerageOrderModel {
+  public init(_ o: Tradier.TradierBrokerageOrderModel) {
     self.init(
       id: o.id,
       orderType: o.type,
@@ -58,7 +58,7 @@ public struct TradierOrdersService: CommonOrdersService, Sendable {
     end: Date?,
     page: Int?,
     limit: Int?,
-  ) async throws -> [CommonOrder] {
+  ) async throws -> [CommonBrokerageOrderModel] {
     let request = Tradier.AccountOrdersRequest(
       accountId: accountId,
       filter: .intraday,
@@ -69,7 +69,7 @@ public struct TradierOrdersService: CommonOrdersService, Sendable {
       end: end,
       includeTags: nil,
     )
-    let root: Tradier.OrdersRoot = try await client.client.send(request)
-    return root.orders.map(CommonOrder.init)
+    let root: Tradier.TradierBrokerageOrdersRootModel = try await client.client.send(request)
+    return root.orders.map(CommonBrokerageOrderModel.init)
   }
 }

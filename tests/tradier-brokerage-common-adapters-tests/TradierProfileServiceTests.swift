@@ -7,18 +7,18 @@ import TradierLib
 
 // Mock client conforming to TradierProfileClient for injection.
 private final class MockProfileClient: TradierProfileClient {
-  let user: Tradier.UserProfile
-  let account: Tradier.AccountProfile
-  let balance: Tradier.Balance
-  init(user: Tradier.UserProfile, account: Tradier.AccountProfile, balance: Tradier.Balance) {
+  let user: Tradier.TradierBrokerageUserProfileModel
+  let account: Tradier.TradierBrokerageAccountProfileModel
+  let balance: Tradier.TradierBrokerageBalanceModel
+  init(user: Tradier.TradierBrokerageUserProfileModel, account: Tradier.TradierBrokerageAccountProfileModel, balance: Tradier.TradierBrokerageBalanceModel) {
     self.user = user
     self.account = account
     self.balance = balance
   }
 
-  func userProfile() async throws -> Tradier.UserProfile { user }
-  func accountProfile(for _: String) async throws -> Tradier.AccountProfile { account }
-  func accountBalances(for _: String) async throws -> Tradier.Balance { balance }
+  func userProfile() async throws -> Tradier.TradierBrokerageUserProfileModel { user }
+  func accountProfile(for _: String) async throws -> Tradier.TradierBrokerageAccountProfileModel { account }
+  func accountBalances(for _: String) async throws -> Tradier.TradierBrokerageBalanceModel { balance }
 }
 
 @Test

@@ -19,7 +19,7 @@ private enum _DateFmt {
   }()
 }
 
-extension CommonOptionExpiration {
+extension CommonBrokerageOptionExpirationModel {
   init(_ e: Option.Expiration) {
     let d = _DateFmt.yyyyMMdd.date(from: e.date) ?? Date(timeIntervalSince1970: 0)
     self.init(
@@ -52,13 +52,13 @@ public protocol TradierOptionDomainClient: Sendable {
     kind: Option.Kind,
     maxStrikes: Int,
     includeGreeks: Bool,
-  ) async throws -> [Tradier.Quote]
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel]
 
   func optionChain(
     for symbol: String,
     expiration: Option.Expiration,
     includeGreeks: Bool,
-  ) async throws -> [Tradier.Quote]
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel]
 }
 
 extension Tradier.CodableService: TradierOptionDomainClient {}
@@ -106,7 +106,7 @@ public struct TradierOptionService: CommonOptionService, Sendable {
 
   // MARK: - CommonOptionService
 
-  public func expirations(for symbol: String) async throws -> [CommonOptionExpiration] {
+  public func expirations(for symbol: String) async throws -> [CommonBrokerageOptionExpirationModel] {
     let exps = try await client.optionExpirations(
       for: symbol,
       includeAllRoots: nil,
@@ -114,16 +114,16 @@ public struct TradierOptionService: CommonOptionService, Sendable {
       contractSize: nil,
       expirationType: true,
     )
-    return exps.map(CommonOptionExpiration.init)
+    return exps.map(CommonBrokerageOptionExpirationModel.init)
   }
 
   public func optionQuotes(
     for symbol: String,
-    expiration: CommonOptionExpiration,
+    expiration: CommonBrokerageOptionExpirationModel,
     kind: CommonOptionKind,
     maxStrikes: Int,
     includeGreeks: Bool,
-  ) async throws -> [CommonOptionQuote] {
+  ) async throws -> [CommonBrokerageOptionQuoteModel] {
     let tradierExp: Option.Expiration = .init(
       date: expiration.dateString,
       expirationType: expiration.expirationType,
@@ -136,14 +136,14 @@ public struct TradierOptionService: CommonOptionService, Sendable {
       maxStrikes: maxStrikes,
       includeGreeks: includeGreeks,
     )
-    return quotes.map(CommonOptionQuote.init)
+    return quotes.map(CommonBrokerageOptionQuoteModel.init)
   }
 
   public func optionChain(
     for symbol: String,
-    expiration: CommonOptionExpiration,
+    expiration: CommonBrokerageOptionExpirationModel,
     includeGreeks: Bool,
-  ) async throws -> [CommonOptionQuote] {
+  ) async throws -> [CommonBrokerageOptionQuoteModel] {
     let tradierExp: Option.Expiration = .init(
       date: expiration.dateString,
       expirationType: expiration.expirationType,
@@ -154,6 +154,6 @@ public struct TradierOptionService: CommonOptionService, Sendable {
       expiration: tradierExp,
       includeGreeks: includeGreeks,
     )
-    return quotes.map(CommonOptionQuote.init)
+    return quotes.map(CommonBrokerageOptionQuoteModel.init)
   }
 }

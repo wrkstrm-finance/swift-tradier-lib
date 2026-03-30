@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonClosedPosition {
-  public init(_ cp: Tradier.ClosedPosition) {
+extension CommonBrokerageClosedPositionModel {
+  public init(_ cp: Tradier.TradierBrokerageClosedPositionModel) {
     self.init(
       symbol: cp.symbol,
       quantity: cp.quantity,

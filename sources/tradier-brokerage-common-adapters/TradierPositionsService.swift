@@ -34,12 +34,12 @@ public struct TradierPositionsService: CommonPositionsService, Sendable {
     }
   }
 
-  public func positions(for accountId: String) async throws -> [CommonPosition] {
-    let positions: [Tradier.Position] = try await client.accountPositions(for: accountId)
-    return positions.map(CommonPosition.init)
+  public func positions(for accountId: String) async throws -> [CommonBrokeragePositionModel] {
+    let positions: [Tradier.TradierBrokeragePositionModel] = try await client.accountPositions(for: accountId)
+    return positions.map(CommonBrokeragePositionModel.init)
   }
 
-  public func livePositions(for accountId: String) async throws -> [CommonPosition] {
+  public func livePositions(for accountId: String) async throws -> [CommonBrokeragePositionModel] {
     try await positions(for: accountId)
   }
 }

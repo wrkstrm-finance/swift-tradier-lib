@@ -29,31 +29,31 @@ extension Tradier {
   ///    }
   /// }
   /// ```
-  public struct SingleQuoteRoot: Decodable, Sendable {
+  public struct TradierBrokerageSingleQuoteRootModel: Decodable, Sendable {
     /// The quotes container holding the actual quote data.
-    public var quotes: Quotes?
+    public var quotes: TradierBrokerageQuotesModel?
   }
 
-  public struct MultiQuotesRoot: Decodable, Sendable {
+  public struct TradierBrokerageMultiQuotesRootModel: Decodable, Sendable {
     /// The quotes container holding the actual quote data.
-    public var quotes: MultiQuotes?
+    public var quotes: TradierBrokerageMultiQuotesModel?
   }
 
   /// A wrapper containing individual quote data.
-  public struct MultiQuotes: Decodable, Sendable {
+  public struct TradierBrokerageMultiQuotesModel: Decodable, Sendable {
     /// The quote information for a security.
-    public var quote: [Quote]?
+    public var quote: [TradierBrokerageQuoteModel]?
   }
 
   /// A wrapper containing individual quote data.
-  public struct Quotes: Decodable, Sendable {
+  public struct TradierBrokerageQuotesModel: Decodable, Sendable {
     /// The quote information for a security.
-    public var quote: Quote?
+    public var quote: TradierBrokerageQuoteModel?
   }
 
   /// A comprehensive snapshot of market data for a security.
   ///
-  /// The `Quote` type contains real-time market data including:
+  /// The `TradierBrokerageQuoteModel` type contains real-time market data including:
   /// - Current pricing and trading activity
   /// - Best bid/ask quotes
   /// - Historical metrics like 52-week highs and lows
@@ -65,7 +65,7 @@ extension Tradier {
   /// let quote = quoteResponse.quotes?.quote
   /// print("Current price: \(quote.last)")
   /// ```
-  public struct Quote: Decodable, Hashable, Sendable {
+  public struct TradierBrokerageQuoteModel: Decodable, Hashable, Sendable {
     /// Optional identifier for the quote.
     public var id: Int?
 
@@ -173,8 +173,8 @@ extension Tradier {
     /// The option type, call or put.
     public var optionType: String?
 
-    /// Calculated option Greeks.
-    public var greeks: Greeks?
+    /// Calculated option TradierBrokerageOptionGreeksModel.
+    public var greeks: TradierBrokerageOptionGreeksModel?
 
     private enum CodingKeys: String, CodingKey {
       case id, symbol, description, exch, type, last, change, volume, open, high, low, close, bid,
@@ -205,7 +205,7 @@ extension Tradier {
   }
 
   /// Sensitivity measures for option pricing.
-  public struct Greeks: Codable, Hashable, Sendable {
+  public struct TradierBrokerageOptionGreeksModel: Codable, Hashable, Sendable {
     public var delta: Double?
     public var gamma: Double?
     public var theta: Double?
@@ -249,7 +249,7 @@ extension Tradier {
       askIv = try container.decodeIfPresent(Double.self, forKey: .askIv)
       smvVol = try container.decodeIfPresent(Double.self, forKey: .smvVol)
       if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt) {
-        updatedAt = Greeks.dateFormatter.date(from: updatedAtString)
+        updatedAt = TradierBrokerageOptionGreeksModel.dateFormatter.date(from: updatedAtString)
       } else {
         updatedAt = nil
       }
@@ -268,31 +268,31 @@ extension Tradier {
       try container.encodeIfPresent(askIv, forKey: .askIv)
       try container.encodeIfPresent(smvVol, forKey: .smvVol)
       if let updatedAt {
-        let dateString = Greeks.dateFormatter.string(from: updatedAt)
+        let dateString = TradierBrokerageOptionGreeksModel.dateFormatter.string(from: updatedAt)
         try container.encode(dateString, forKey: .updatedAt)
       }
     }
   }
 
   /// A container for time series market data.
-  public struct Series: Decodable, Sendable {
+  public struct TradierBrokerageTimeSeriesModel: Decodable, Sendable {
     /// The series data wrapper.
-    public var series: Data
+    public var series: TradierBrokerageTimeSeriesDataModel
   }
 
   /// A wrapper for time series data points.
-  public struct Data: Decodable, Sendable {
+  public struct TradierBrokerageTimeSeriesDataModel: Decodable, Sendable {
     /// An array of time interval market data points.
-    public var data: [TimeSale]
+    public var data: [TradierBrokerageTimeSaleModel]
   }
 
   /// A market data point representing trading activity over a time interval.
   ///
-  /// `TimeSale` provides OHLCV (Open, High, Low, Close, Volume) data for a specific time period.
+  /// `TradierBrokerageTimeSaleModel` provides OHLCV (Open, High, Low, Close, Volume) data for a specific time period.
   /// The interval can be tick-by-tick, one minute, or five minutes.
-  public struct TimeSale: Comparable, Decodable, Sendable {
+  public struct TradierBrokerageTimeSaleModel: Comparable, Decodable, Sendable {
     /// Compares two time sales based on their timestamps.
-    public static func < (lhs: TimeSale, rhs: TimeSale) -> Bool {
+    public static func < (lhs: TradierBrokerageTimeSaleModel, rhs: TradierBrokerageTimeSaleModel) -> Bool {
       (lhs.timestamp ?? 0) < (rhs.timestamp ?? 0)
     }
 
@@ -323,7 +323,7 @@ extension Tradier {
     /// The volume-weighted average price for the interval.
     public var vwap: Double
 
-    /// Keys for encoding and decoding TimeSale data.
+    /// Keys for encoding and decoding TradierBrokerageTimeSaleModel data.
     public enum CodingKeys: String, CodingKey {
       case time
       case timestamp
@@ -345,11 +345,11 @@ extension Tradier {
 
   /// A model representing a directional price movement segment.
   ///
-  /// `Leg` analyzes price movements by tracking:
+  /// `TradierBrokerageQuoteLegModel` analyzes price movements by tracking:
   /// - Time boundaries of the movement
   /// - Price levels and direction
   /// - Volume and wave patterns
-  public struct Leg: Decodable, Sendable {
+  public struct TradierBrokerageQuoteLegModel: Decodable, Sendable {
     /// The starting time of the price movement.
     public var firstTime: Date
 
@@ -386,7 +386,7 @@ extension Tradier {
     /// The total number of intervals in this movement.
     public var totalOpenIntervals: Float
 
-    /// Keys for encoding and decoding Leg data.
+    /// Keys for encoding and decoding TradierBrokerageQuoteLegModel data.
     public enum CodingKeys: String, CodingKey {
       case firstTime = "time"
       case lastTime = "last_time"

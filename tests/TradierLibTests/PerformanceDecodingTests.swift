@@ -26,7 +26,7 @@ struct PerformanceDecodingTests {
     let foundationStart = CFAbsoluteTimeGetCurrent()
     var fCount = 0
     for _ in 0..<200 {  // warm + repeat
-      _ = try foundationDecoder.decode(Tradier.UserProfileRoot.self, from: data)
+      _ = try foundationDecoder.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
       fCount += 1
     }
     let foundationElapsed = CFAbsoluteTimeGetCurrent() - foundationStart
@@ -37,7 +37,7 @@ struct PerformanceDecodingTests {
     let reerStart = CFAbsoluteTimeGetCurrent()
     var rCount = 0
     for _ in 0..<200 {
-      _ = try parser.decode(Tradier.UserProfileRoot.self, from: data)
+      _ = try parser.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
       rCount += 1
     }
     let reerElapsed = CFAbsoluteTimeGetCurrent() - reerStart
@@ -82,14 +82,14 @@ struct PerformanceDecodingTests {
     // Foundation baseline
     let foundationDecoder = JSONDecoder.commonDateParsing
     let fRuns = try runsWithinBudget {
-      try foundationDecoder.decode(Tradier.UserProfileRoot.self, from: data)
+      try foundationDecoder.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
     }
 
     // ReerJSON via JSON.Parser (if available)
     #if canImport(ReerJSONParserAdapter)
     let parser = ReerJSONParserAdapter.makeParser()
     let rRuns = try runsWithinBudget {
-      try parser.decode(Tradier.UserProfileRoot.self, from: data)
+      try parser.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
     }
     print("144Hz frame budget: Foundation runs/frame=\(fRuns), ReerJSON runs/frame=\(rRuns)")
     #else
@@ -128,17 +128,17 @@ struct PerformanceDecodingTests {
 
     // 1) Baseline ReerJSON
     let pre = try measureOps(duration: 0.5) {
-      _ = try reer.decode(Tradier.OptionChainRoot.self, from: data)
+      _ = try reer.decode(Tradier.TradierBrokerageOptionChainRootModel.self, from: data)
     }
 
     // 2) Foundation warm-up ("MANY runs")
     _ = try measureOps(duration: 2.0) {
-      _ = try foundation.decode(Tradier.OptionChainRoot.self, from: data)
+      _ = try foundation.decode(Tradier.TradierBrokerageOptionChainRootModel.self, from: data)
     }
 
     // 3) Post-warm ReerJSON
     let post = try measureOps(duration: 0.5) {
-      _ = try reer.decode(Tradier.OptionChainRoot.self, from: data)
+      _ = try reer.decode(Tradier.TradierBrokerageOptionChainRootModel.self, from: data)
     }
 
     let preNs = pre.perOp * 1e9
@@ -174,19 +174,19 @@ struct PerformanceDecodingTests {
 
     let payloads: [Any] = try [
       Payload(
-        name: "user_profile", data: load("user_profile"), type: Tradier.UserProfileRoot.self,
+        name: "user_profile", data: load("user_profile"), type: Tradier.TradierBrokerageUserProfileRootModel.self,
       ),
-      Payload(name: "positions", data: load("positions"), type: Tradier.PositionsRoot.self),
+      Payload(name: "positions", data: load("positions"), type: Tradier.TradierBrokeragePositionsRootModel.self),
       Payload(
-        name: "positions_large", data: load("positions_large"), type: Tradier.PositionsRoot.self,
+        name: "positions_large", data: load("positions_large"), type: Tradier.TradierBrokeragePositionsRootModel.self,
       ),
       Payload(
         name: "option_expirations", data: load("option_expirations"),
-        type: Tradier.OptionExpirationsRoot.self,
+        type: Tradier.TradierBrokerageOptionExpirationsRootModel.self,
       ),
-      Payload(name: "quotes", data: load("quotes"), type: Tradier.SingleQuoteRoot.self),
+      Payload(name: "quotes", data: load("quotes"), type: Tradier.TradierBrokerageSingleQuoteRootModel.self),
       Payload(
-        name: "option_chain", data: load("option_chain"), type: Tradier.OptionChainRoot.self,
+        name: "option_chain", data: load("option_chain"), type: Tradier.TradierBrokerageOptionChainRootModel.self,
       ),
     ]
 
@@ -255,15 +255,15 @@ struct PerformanceDecodingTests {
 
     // Iterate typed payloads via a switch cast
     for anyP in payloads {
-      if let p = anyP as? Payload<Tradier.UserProfileRoot> {
+      if let p = anyP as? Payload<Tradier.TradierBrokerageUserProfileRootModel> {
         try report(p)
-      } else if let p = anyP as? Payload<Tradier.PositionsRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokeragePositionsRootModel> {
         try report(p)
-      } else if let p = anyP as? Payload<Tradier.OptionExpirationsRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageOptionExpirationsRootModel> {
         try report(p)
-      } else if let p = anyP as? Payload<Tradier.SingleQuoteRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageSingleQuoteRootModel> {
         try report(p)
-      } else if let p = anyP as? Payload<Tradier.OptionChainRoot> {
+      } else if let p = anyP as? Payload<Tradier.TradierBrokerageOptionChainRootModel> {
         try report(p)
       }
     }

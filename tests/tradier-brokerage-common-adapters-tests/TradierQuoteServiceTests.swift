@@ -11,13 +11,13 @@ private actor MockTradierClient: TradierQuoteClient {
   nonisolated let serviceName: String = "Tradier(Mock)"
   var storageLast: [String: Double] = [:]
   func seed(symbol: String, last: Double) { storageLast[symbol] = last }
-  func quote(for symbol: String) async throws -> Tradier.Quote {
+  func quote(for symbol: String) async throws -> Tradier.TradierBrokerageQuoteModel {
     guard let last = storageLast[symbol] else { throw TestError() }
     return try TestDecodeHelper.makeTradierQuote(symbol: symbol, last: last)
   }
 
-  func quotes(for symbols: [String]) async throws -> [Tradier.Quote] {
-    var result: [Tradier.Quote] = []
+  func quotes(for symbols: [String]) async throws -> [Tradier.TradierBrokerageQuoteModel] {
+    var result: [Tradier.TradierBrokerageQuoteModel] = []
     for symbol in symbols {
       try await result.append(quote(for: symbol))
     }

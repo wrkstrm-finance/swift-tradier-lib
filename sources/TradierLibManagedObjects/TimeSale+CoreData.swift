@@ -19,7 +19,7 @@ public class ManagedSeries: NSManagedObject, Codable {
         as? NSManagedObjectContext,
       let entity =
         NSEntityDescription.entity(forEntityName: "ManagedSeries", in: managedObjectContext)
-    else { Log.guard("Failed to decode Series") }
+    else { Log.guard("Failed to decode TradierBrokerageTimeSeriesModel") }
 
     self.init(entity: entity, insertInto: managedObjectContext)
 
@@ -127,7 +127,7 @@ public class ManagedTimeSale: NSManagedObject, Comparable, Codable {
         decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext,
       let entity =
         NSEntityDescription.entity(forEntityName: "ManagedTimeSale", in: managedObjectContext)
-    else { Log.guard("Failed to decode TimeSale") }
+    else { Log.guard("Failed to decode TradierBrokerageTimeSaleModel") }
 
     self.init(entity: entity, insertInto: managedObjectContext)
 
@@ -180,7 +180,7 @@ public class ManagedTimeSale: NSManagedObject, Comparable, Codable {
   }
 }
 
-public struct Leg: Decodable, Sendable {
+public struct TradierBrokerageQuoteLegModel: Decodable, Sendable {
   public enum CodingKeys: String, CodingKey {
     case firstTime = "time"
 

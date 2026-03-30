@@ -3,9 +3,9 @@ import SwiftUniversalFoundation
 import WrkstrmNetworking
 
 public protocol QuoteService: Sendable {
-  func quote(for symbol: String) async throws -> Tradier.Quote
+  func quote(for symbol: String) async throws -> Tradier.TradierBrokerageQuoteModel
 
-  func quotes(for symbols: [String]) async throws -> [Tradier.Quote]
+  func quotes(for symbols: [String]) async throws -> [Tradier.TradierBrokerageQuoteModel]
 }
 
 public protocol OptionQuoteService: QuoteService, Sendable {
@@ -23,13 +23,13 @@ public protocol OptionQuoteService: QuoteService, Sendable {
     kind: Option.Kind,
     maxStrikes: Int,
     includeGreeks: Bool,
-  ) async throws -> [Tradier.Quote]
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel]
 
   func optionChain(
     for symbol: String,
     expiration: Option.Expiration,
     includeGreeks: Bool,
-  ) async throws -> [Tradier.Quote]
+  ) async throws -> [Tradier.TradierBrokerageQuoteModel]
 }
 
 public enum Option {
@@ -104,7 +104,7 @@ extension Tradier {
 }
 
 extension Tradier {
-  public struct OptionExpirationsRoot: Codable, Sendable {
+  public struct TradierBrokerageOptionExpirationsRootModel: Codable, Sendable {
     public var expirations: Expirations
 
     public struct Expirations: Codable, Sendable {
@@ -112,11 +112,11 @@ extension Tradier {
     }
   }
 
-  public struct OptionChainRoot: Decodable, Sendable {
+  public struct TradierBrokerageOptionChainRootModel: Decodable, Sendable {
     public var options: Options
 
     public struct Options: Decodable, Sendable {
-      public var option: [Quote]
+      public var option: [TradierBrokerageQuoteModel]
     }
   }
 }

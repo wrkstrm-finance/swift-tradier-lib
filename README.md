@@ -14,7 +14,7 @@ Provides account, trading, and market data models used across wrkstrm apps.
 - Do map wire keys explicitly with `CodingKeys`.
 
 ```swift
-struct Quote: Decodable {
+struct TradierBrokerageQuoteModel: Decodable {
   let lastVolume: Double
   enum CodingKeys: String, CodingKey { case lastVolume = "last_volume" }
 }

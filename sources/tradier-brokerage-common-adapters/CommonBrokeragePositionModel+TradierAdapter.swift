@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonPosition {
-  public init(_ position: Tradier.Position) {
+extension CommonBrokeragePositionModel {
+  public init(_ position: Tradier.TradierBrokeragePositionModel) {
     self.init(
       symbol: position.symbol,
       quantity: position.quantity,

@@ -3,15 +3,15 @@ import Testing
 
 @testable import TradierLib
 
-@Suite("Positions decoding")
+@Suite("TradierBrokeragePositionsModel decoding")
 struct PositionsDecodingTests {
   @Test
   func decodesNullPositions() throws {
     let json: Data = """
       { "positions": "null" }
       """.data(using: .utf8)!
-    let decoded: Tradier.PositionsRoot =
-      try Tradier.decoder.decode(Tradier.PositionsRoot.self, from: json)
+    let decoded: Tradier.TradierBrokeragePositionsRootModel =
+      try Tradier.decoder.decode(Tradier.TradierBrokeragePositionsRootModel.self, from: json)
     #expect(decoded.positions == nil)
   }
 
@@ -27,8 +27,8 @@ struct PositionsDecodingTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded: Tradier.PositionsRoot =
-      try Tradier.decoder.decode(Tradier.PositionsRoot.self, from: json)
+    let decoded: Tradier.TradierBrokeragePositionsRootModel =
+      try Tradier.decoder.decode(Tradier.TradierBrokeragePositionsRootModel.self, from: json)
     #expect(decoded.positions?.position?.count == 1)
     #expect(decoded.positions?.position?.first?.symbol == "AAPL")
     #expect(decoded.positions?.position?.first?.quantity == 1)

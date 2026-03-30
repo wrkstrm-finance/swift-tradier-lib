@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonAccountProfile {
-  public init(_ tradierAccount: Tradier.AccountProfile) {
+extension CommonBrokerageAccountProfileModel {
+  public init(_ tradierAccount: Tradier.TradierBrokerageAccountProfileModel) {
     let displayName: String?
     if let name = tradierAccount.name {
       let first = name.first ?? ""
@@ -14,7 +14,7 @@ extension CommonAccountProfile {
       displayName = nil
     }
 
-    let address: CommonProfileAddress?
+    let address: CommonBrokerageProfileAddressModel?
     if let a = tradierAccount.address {
       address = .init(
         address1: a.address1,

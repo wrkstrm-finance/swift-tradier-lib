@@ -39,15 +39,15 @@ public struct TradierActivityService: CommonActivityService, Sendable {
     start: Date? = nil,
     end: Date? = nil,
     type: CommonHistoryEventType? = nil,
-  ) async throws -> [CommonActivityEvent] {
+  ) async throws -> [CommonBrokerageActivityEventModel] {
     let tradierType = type.flatMap { Tradier.HistoryEventType(rawValue: $0.rawValue) }
-    let transactions: [Tradier.Transaction] = try await client.accountHistory(
+    let transactions: [Tradier.TradierBrokerageTransactionModel] = try await client.accountHistory(
       for: accountId,
       start: start,
       end: end,
       type: tradierType,
     )
-    return transactions.map(CommonActivityEvent.init)
+    return transactions.map(CommonBrokerageActivityEventModel.init)
   }
 
   public func gainLoss(
@@ -59,10 +59,10 @@ public struct TradierActivityService: CommonActivityService, Sendable {
     start: Date? = nil,
     end: Date? = nil,
     symbol: String? = nil,
-  ) async throws -> [CommonClosedPosition] {
+  ) async throws -> [CommonBrokerageClosedPositionModel] {
     let tradierSortBy = sortBy.flatMap { Tradier.AccountGainLossRequest.SortBy(rawValue: $0.rawValue) }
     let tradierSort = sort.flatMap { Tradier.AccountGainLossRequest.SortDirection(rawValue: $0.rawValue) }
-    let closed: [Tradier.ClosedPosition] = try await client.accountGainLoss(
+    let closed: [Tradier.TradierBrokerageClosedPositionModel] = try await client.accountGainLoss(
       for: accountId,
       page: page,
       limit: limit,
@@ -72,6 +72,6 @@ public struct TradierActivityService: CommonActivityService, Sendable {
       end: end,
       symbol: symbol,
     )
-    return closed.map(CommonClosedPosition.init)
+    return closed.map(CommonBrokerageClosedPositionModel.init)
   }
 }

@@ -30,7 +30,7 @@ extension Tradier {
     case incorrectOrderQuantity = "IncorrectOrderQuantity"
     /// Time In Force (Day or GTC) is not defined
     case incorrectTimeInForce = "IncorrectTimeInForce"
-    /// Multi Leg Orders with Index options must have all legs within 1 expiration date. Time
+    /// Multi TradierBrokerageQuoteLegModel Orders with Index options must have all legs within 1 expiration date. Time
     /// spreads are not allowed on Index Options
     case indexOptionsOneExparyDate = "IndexOptionsOneExparyDate"
     /// You do not have enough buying power for this trade
@@ -68,7 +68,7 @@ extension Tradier {
     case optionTypeUndefined = "OptionTypeUndefined"
     /// Change of order's contingent is not allowed
     case orderContingentChangeNotAllowed = "OrderContingentChangeNotAllowed"
-    /// Order is not allowed. Account trading restriction: closing orders only
+    /// TradierBrokerageOrderModel is not allowed. Account trading restriction: closing orders only
     case orderIsNotAllowedForAccount = "OrderIsNotAllowedForAccount"
     /// Price of {0} {1} order is {2} than market price
     case orderPriceIsInvalid = "OrderPriceIsInvalid"
@@ -162,7 +162,7 @@ extension Tradier {
     case limitOrderRequiredDueToPriceVolatility = "LimitOrderRequiredDueToPriceVolatility"
     /// Outside of market hours this order is required to be placed at a limit price.
     case limitOrderRequiredOutsideMarketHours = "LimitOrderRequiredOutsideMarketHours"
-    /// Order failed PriceRange - AGGRESSIVE: OrderPrice {1} RefPrice {2} Limit {3} aggressive
+    /// TradierBrokerageOrderModel failed PriceRange - AGGRESSIVE: OrderPrice {1} RefPrice {2} Limit {3} aggressive
     case orderFailedPriceRangeAggressive = "OrderFailedPriceRangeAggressive"
 
     /// Human-readable description of the error code.
@@ -301,12 +301,12 @@ extension Tradier {
 
       case .indexOptionsOneExparyDate:
         NSLocalizedString(
-          "Multi Leg Orders with Index options must have all legs within 1"
+          "Multi TradierBrokerageQuoteLegModel Orders with Index options must have all legs within 1"
             + "expiration date. Time spreads are not allowed on Index Options",
           comment: """
               Tradier API error code 'IndexOptionsOneExparyDate'. Trader sees this when the \
             brokerage
-              returns this code. Multi Leg Orders with Index options must have all legs within 1
+              returns this code. Multi TradierBrokerageQuoteLegModel Orders with Index options must have all legs within 1
               expiration date. Time spreads are not allowed on Index Options Translators: retain \
             phone
               numbers like 980-272-3880 and keep trading acronyms (GTC, OCO) unchanged.
@@ -489,10 +489,10 @@ extension Tradier {
 
       case .orderIsNotAllowedForAccount:
         NSLocalizedString(
-          "Order is not allowed. Account trading restriction: closing orders only",
+          "TradierBrokerageOrderModel is not allowed. Account trading restriction: closing orders only",
           comment: """
               Tradier API error code 'OrderIsNotAllowedForAccount'. Trader sees this when the
-              brokerage returns this code. Order is not allowed. Account trading restriction: \
+              brokerage returns this code. TradierBrokerageOrderModel is not allowed. Account trading restriction: \
             closing
               orders only Translators: retain phone numbers like 980-272-3880 and keep trading
               acronyms (GTC, OCO) unchanged.
@@ -951,11 +951,11 @@ extension Tradier {
 
       case .orderFailedPriceRangeAggressive:
         NSLocalizedString(
-          "Order failed PriceRange - AGGRESSIVE: OrderPrice {1} RefPrice {2}"
+          "TradierBrokerageOrderModel failed PriceRange - AGGRESSIVE: OrderPrice {1} RefPrice {2}"
             + "Limit {3} aggressive",
           comment: """
               Tradier API error code 'OrderFailedPriceRangeAggressive'. Trader sees this when the
-              brokerage returns this code. Order failed PriceRange - AGGRESSIVE: OrderPrice {1}
+              brokerage returns this code. TradierBrokerageOrderModel failed PriceRange - AGGRESSIVE: OrderPrice {1}
               RefPrice {2} Limit {3} aggressive Translators: retain phone numbers like 980-272-3880
               and keep trading acronyms (GTC, OCO) unchanged.
             """,

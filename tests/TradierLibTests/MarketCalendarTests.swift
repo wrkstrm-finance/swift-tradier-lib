@@ -50,9 +50,10 @@ struct MarketCalendarTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded: Tradier.MarketCalendarRoot =
-      try Tradier.decoder.decode(Tradier.MarketCalendarRoot.self, from: json)
-    let first: Tradier.MarketCalendarRoot.Day = try #require(decoded.calendar.days.day.first)
+    let decoded: Tradier.TradierBrokerageMarketCalendarRootModel =
+      try Tradier.decoder.decode(Tradier.TradierBrokerageMarketCalendarRootModel.self, from: json)
+    let first: Tradier.TradierBrokerageMarketCalendarRootModel.TradierBrokerageMarketCalendarDayModel =
+      try #require(decoded.calendar.days.day.first)
     #expect(first.status == "open")
     let session = try #require(first.open)
     // Construct expected Date for 09:30 on the same day

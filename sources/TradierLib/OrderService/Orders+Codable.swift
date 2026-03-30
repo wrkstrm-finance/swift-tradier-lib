@@ -2,11 +2,11 @@ import Foundation
 import SwiftUniversalMain
 
 extension Tradier {
-  public struct OrderResultRoot: Decodable, Sendable {
-    public var order: OrderResult
+  public struct TradierBrokerageOrderResultRootModel: Decodable, Sendable {
+    public var order: TradierBrokerageOrderResultModel
   }
 
-  public struct OrderResult: Decodable, Sendable {
+  public struct TradierBrokerageOrderResultModel: Decodable, Sendable {
     public var id: Int
     public var status: String
     public var partnerId: String?
@@ -18,8 +18,8 @@ extension Tradier {
     }
   }
 
-  public struct OrdersRoot: Decodable, Sendable {
-    public var orders: [Order]
+  public struct TradierBrokerageOrdersRootModel: Decodable, Sendable {
+    public var orders: [TradierBrokerageOrderModel]
 
     private enum CodingKeys: String, CodingKey {
       case orders
@@ -37,17 +37,17 @@ extension Tradier {
       )
       orders =
         try ordersContainer.decodeArrayAllowingNullOrSingle(
-          Order.self,
+          TradierBrokerageOrderModel.self,
           forKey: .order,
         ) ?? []
     }
   }
 
-  public struct OrderRoot: Decodable, Sendable {
-    public var order: Order
+  public struct TradierBrokerageOrderRootModel: Decodable, Sendable {
+    public var order: TradierBrokerageOrderModel
   }
 
-  public struct Order: Decodable, Sendable, Identifiable {
+  public struct TradierBrokerageOrderModel: Decodable, Sendable, Identifiable {
     public var id: Int
     public var type: String
     public var symbol: String
@@ -67,7 +67,7 @@ extension Tradier {
     public var optionSymbol: String?
     public var numLegs: Int?
     public var strategy: String?
-    public var legs: [Order]?
+    public var legs: [TradierBrokerageOrderModel]?
 
     private enum CodingKeys: String, CodingKey {
       case id
@@ -113,7 +113,7 @@ extension Tradier {
       optionSymbol = try container.decodeIfPresent(String.self, forKey: .optionSymbol)
       numLegs = try container.decodeIfPresent(Int.self, forKey: .numLegs)
       strategy = try container.decodeIfPresent(String.self, forKey: .strategy)
-      legs = try container.decodeIfPresent([Order].self, forKey: .legs)
+      legs = try container.decodeIfPresent([TradierBrokerageOrderModel].self, forKey: .legs)
     }
   }
 }

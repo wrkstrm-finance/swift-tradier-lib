@@ -2,9 +2,9 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonQuote {
-  /// Adapter from Tradier SDK model to CommonQuote.
-  public init(_ tradierQuote: Tradier.Quote) {
+extension CommonBrokerageQuoteModel {
+  /// Adapter from Tradier SDK model to CommonBrokerageQuoteModel.
+  public init(_ tradierQuote: Tradier.TradierBrokerageQuoteModel) {
     func secondsOrMillisToDate(_ value: Int?) -> Date? {
       guard let raw = value else { return nil }
       if raw > 1_000_000_000_000 { return Date(timeIntervalSince1970: TimeInterval(raw) / 1000.0) }
@@ -28,9 +28,9 @@ extension CommonQuote {
     let tradeDate = secondsOrMillisToDate(tradierQuote.tradeDate)
     let expirationDate = parseExpiration(tradierQuote.expirationDate)
 
-    let greeks: CommonGreeks?
+    let greeks: CommonBrokerageQuoteGreeksModel?
     if let g = tradierQuote.greeks {
-      greeks = CommonGreeks(
+      greeks = CommonBrokerageQuoteGreeksModel(
         delta: g.delta,
         gamma: g.gamma,
         theta: g.theta,

@@ -29,14 +29,14 @@ public struct TradierProductionQuoteService: CommonQuoteService, CommonQuoteVari
   #endif
 
   public func quote(for symbol: String, accountId _: String) async throws -> CommonQuoteVariant {
-    let tradierQuote: Tradier.Quote = try await client.quote(for: symbol)
+    let tradierQuote: Tradier.TradierBrokerageQuoteModel = try await client.quote(for: symbol)
     return CommonQuoteVariant(tradierQuote)
   }
 
   public func quotes(for symbols: [String], accountId _: String) async throws
     -> [CommonQuoteVariant]
   {
-    let tradierQuotes: [Tradier.Quote] = try await client.quotes(for: symbols)
+    let tradierQuotes: [Tradier.TradierBrokerageQuoteModel] = try await client.quotes(for: symbols)
     return tradierQuotes.map(CommonQuoteVariant.init)
   }
 
@@ -47,13 +47,13 @@ public struct TradierProductionQuoteService: CommonQuoteService, CommonQuoteVari
     accountId _: String,
     detail: QuoteDetail,
   ) async throws -> CommonQuoteVariant {
-    let q: Tradier.Quote = try await client.quote(for: symbol)
+    let q: Tradier.TradierBrokerageQuoteModel = try await client.quote(for: symbol)
     switch detail {
     case .full:
       return CommonQuoteVariant(q)
 
     case .slim:
-      let detailed = CommonQuoteDetailed(CommonQuote(q))
+      let detailed = CommonBrokerageQuoteDetailedModel(CommonBrokerageQuoteModel(q))
       return .slim(detailed.essentials)
     }
   }
@@ -63,13 +63,13 @@ public struct TradierProductionQuoteService: CommonQuoteService, CommonQuoteVari
     accountId _: String,
     detail: QuoteDetail,
   ) async throws -> [CommonQuoteVariant] {
-    let quotes: [Tradier.Quote] = try await client.quotes(for: symbols)
+    let quotes: [Tradier.TradierBrokerageQuoteModel] = try await client.quotes(for: symbols)
     switch detail {
     case .full:
       return quotes.map(CommonQuoteVariant.init)
 
     case .slim:
-      return quotes.map { .slim(CommonQuoteEssentials(CommonQuoteDetailed(CommonQuote($0)))) }
+      return quotes.map { .slim(CommonBrokerageQuoteEssentialsModel(CommonBrokerageQuoteDetailedModel(CommonBrokerageQuoteModel($0)))) }
     }
   }
 }

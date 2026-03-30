@@ -2,28 +2,28 @@ import Foundation
 import SwiftUniversalMain
 
 extension Tradier {
-  public struct GainLossRoot: Decodable, Sendable {
-    public var gainloss: GainLoss?
+  public struct TradierBrokerageGainLossRootModel: Decodable, Sendable {
+    public var gainloss: TradierBrokerageGainLossModel?
 
     private enum CodingKeys: String, CodingKey { case gainloss }
   }
 
-  public struct GainLoss: Decodable, Sendable {
-    public var closedPosition: [ClosedPosition]?
+  public struct TradierBrokerageGainLossModel: Decodable, Sendable {
+    public var closedPosition: [TradierBrokerageClosedPositionModel]?
 
     private enum CodingKeys: String, CodingKey { case closedPosition }
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       closedPosition = try container.decodeArrayAllowingNullOrSingle(
-        ClosedPosition.self,
+        TradierBrokerageClosedPositionModel.self,
         forKey: .closedPosition,
       )
     }
   }
 
   /// Represents a closed position in a financial account, including details about the trade and its outcome.
-  public struct ClosedPosition: Decodable, Hashable, Sendable {
+  public struct TradierBrokerageClosedPositionModel: Decodable, Hashable, Sendable {
     /// The date when the position was closed (sold or otherwise exited).
     public var closeDate: Date?
     /// The total cost basis for the position, i.e., the amount originally paid to acquire the position.

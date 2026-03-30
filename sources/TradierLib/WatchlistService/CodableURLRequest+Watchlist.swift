@@ -5,7 +5,7 @@ import WrkstrmNetworking
 
 extension Tradier {
   public struct WatchlistsRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistsRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistsRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "watchlists" }
     public var options: HTTP.Request.Options
@@ -16,7 +16,7 @@ extension Tradier {
   }
 
   public struct WatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistRootModel
     public var method: HTTP.Method { .get }
     public var watchlistId: String
     public var path: String { "watchlists/\(watchlistId)" }
@@ -29,7 +29,7 @@ extension Tradier {
   }
 
   public struct CreateWatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistRootModel
     public var method: HTTP.Method { .post }
     public var path: String { "watchlists" }
     public var options: HTTP.Request.Options
@@ -56,7 +56,7 @@ extension Tradier {
   }
 
   public struct UpdateWatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistRootModel
     public var method: HTTP.Method { .put }
     public var watchlistId: String
     public var path: String { "watchlists/\(watchlistId)" }
@@ -76,7 +76,7 @@ extension Tradier {
   }
 
   public struct DeleteWatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistsRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistsRootModel
     public var method: HTTP.Method { .delete }
     public var watchlistId: String
     public var path: String { "watchlists/\(watchlistId)" }
@@ -89,7 +89,7 @@ extension Tradier {
   }
 
   public struct AddSymbolsToWatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistRootModel
     public var method: HTTP.Method { .post }
     public var watchlistId: String
     public var path: String { "watchlists/\(watchlistId)/symbols" }
@@ -104,7 +104,7 @@ extension Tradier {
   }
 
   public struct RemoveSymbolFromWatchlistRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.WatchlistRoot
+    public typealias ResponseType = Tradier.TradierBrokerageWatchlistRootModel
     public var method: HTTP.Method { .delete }
     public var watchlistId: String
     public var symbol: String

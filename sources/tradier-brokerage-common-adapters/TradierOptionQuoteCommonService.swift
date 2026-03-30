@@ -37,13 +37,13 @@ public struct TradierOptionQuoteCommonService: CommonOptionQuoteService, Sendabl
     }
   }
 
-  public func optionQuote(for symbol: String, accountId _: String) async throws -> CommonOptionQuote
+  public func optionQuote(for symbol: String, accountId _: String) async throws -> CommonBrokerageOptionQuoteModel
   {
     let request = Tradier.MultiQuotesRequest(symbols: [symbol], greeks: true)
-    let root: Tradier.MultiQuotesRoot = try await client.client.send(request)
-    guard let q: Tradier.Quote = root.quotes?.quote?.first else {
+    let root: Tradier.TradierBrokerageMultiQuotesRootModel = try await client.client.send(request)
+    guard let q: Tradier.TradierBrokerageQuoteModel = root.quotes?.quote?.first else {
       throw StringError("No option quote for \(symbol)")
     }
-    return CommonOptionQuote(q)
+    return CommonBrokerageOptionQuoteModel(q)
   }
 }

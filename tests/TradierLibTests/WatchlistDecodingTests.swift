@@ -23,8 +23,8 @@ struct WatchlistDecodingTests {
       }
       """.data(using: .utf8)!
     let decoder: JSONDecoder = Tradier.decoder
-    let root: Tradier.WatchlistRoot =
-      try decoder.decode(Tradier.WatchlistRoot.self, from: json)
+    let root: Tradier.TradierBrokerageWatchlistRootModel =
+      try decoder.decode(Tradier.TradierBrokerageWatchlistRootModel.self, from: json)
     #expect(root.watchlist.items?.item.count == 1)
     #expect(root.watchlist.items?.item.first?.symbol == "AAPL")
   }
@@ -47,8 +47,8 @@ struct WatchlistDecodingTests {
       }
       """.data(using: .utf8)!
     let decoder: JSONDecoder = Tradier.decoder
-    let root: Tradier.WatchlistRoot =
-      try decoder.decode(Tradier.WatchlistRoot.self, from: json)
+    let root: Tradier.TradierBrokerageWatchlistRootModel =
+      try decoder.decode(Tradier.TradierBrokerageWatchlistRootModel.self, from: json)
     #expect(root.watchlist.items?.item.count == 2)
   }
 }

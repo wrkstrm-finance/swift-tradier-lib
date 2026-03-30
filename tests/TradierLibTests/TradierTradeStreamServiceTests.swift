@@ -12,8 +12,8 @@ private actor Box<T> {
 struct TradierTradeStreamServiceTests {
   @Test
   func handleFillPostsNotificationAndJournals() async {
-    let journalBox: Box<Tradier.Transaction> = .init()
-    let notifyBox: Box<Tradier.Transaction> = .init()
+    let journalBox: Box<Tradier.TradierBrokerageTransactionModel> = .init()
+    let notifyBox: Box<Tradier.TradierBrokerageTransactionModel> = .init()
     let service: TradierTradeStreamService = .init(
       accountId: "1",
       tradierToken: "t",
@@ -26,7 +26,7 @@ struct TradierTradeStreamServiceTests {
       object: nil,
       queue: nil,
     ) { note in
-      let tx = note.object as? Tradier.Transaction
+      let tx = note.object as? Tradier.TradierBrokerageTransactionModel
       Task { await notifyBox.set(tx) }
     }
     let json = """
@@ -35,8 +35,8 @@ struct TradierTradeStreamServiceTests {
     await service.handle(text: json)
     NotificationCenter.default.removeObserver(observer)
     try? await Task.sleep(nanoseconds: 1_000_000)
-    let journaled: Tradier.Transaction? = await journalBox.value
-    let notified: Tradier.Transaction? = await notifyBox.value
+    let journaled: Tradier.TradierBrokerageTransactionModel? = await journalBox.value
+    let notified: Tradier.TradierBrokerageTransactionModel? = await notifyBox.value
     #expect(journaled?.trade?.symbol == "AAPL")
     #expect(notified?.trade?.symbol == "AAPL")
   }

@@ -57,8 +57,8 @@ struct AccountProfileTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded: Tradier.ProfileRoot = try Tradier.decoder.decode(
-      Tradier.ProfileRoot.self,
+    let decoded: Tradier.TradierBrokerageProfileRootModel = try Tradier.decoder.decode(
+      Tradier.TradierBrokerageProfileRootModel.self,
       from: json,
     )
     #expect(decoded.profile.accountNumber == "VA000000")

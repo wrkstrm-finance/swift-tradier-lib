@@ -36,15 +36,15 @@ Provide a single source of truth for API surface coverage, test depth, and opera
 
 | Endpoint        | Status | Data Model        | Tests | Observability                |
 | --------------- | ------ | ----------------- | ----- | ---------------------------- |
-| User Profile    | ✅     | `UserProfileRoot` | U     | —                            |
-| Account Profile | ✅     | `ProfileRoot`     | U     | —                            |
-| Balances        | ✅     | `BalancesRoot`    | U     | —                            |
-| Positions       | ✅     | `PositionsRoot`   | U     | —                            |
-| History         | ✅     | `HistoryRoot`     | U     | —                            |
-| Gain/Loss       | 🟡     | `GainLossRoot`    | —     | Request exists but untested  |
-| Orders          | ✅     | `OrdersRoot`      | U     | —                            |
-| Order Detail    | ✅     | `OrderRoot`       | U     | Retry on 429, jitter         |
-| Place Order     | 🟡     | `OrderResultRoot` | —     | Basic market/limit POST only |
+| User Profile    | ✅     | `TradierBrokerageUserProfileRootModel` | U     | —                            |
+| Account Profile | ✅     | `TradierBrokerageProfileRootModel`     | U     | —                            |
+| Balances        | ✅     | `TradierBrokerageBalancesRootModel`    | U     | —                            |
+| Positions       | ✅     | `TradierBrokeragePositionsRootModel`   | U     | —                            |
+| History         | ✅     | `TradierBrokerageHistoryRootModel`     | U     | —                            |
+| Gain/Loss       | 🟡     | `TradierBrokerageGainLossRootModel`    | —     | Request exists but untested  |
+| Orders          | ✅     | `TradierBrokerageOrdersRootModel`      | U     | —                            |
+| Order Detail    | ✅     | `TradierBrokerageOrderRootModel`       | U     | Retry on 429, jitter         |
+| Place Order     | 🟡     | `TradierBrokerageOrderResultRootModel` | —     | Basic market/limit POST only |
 
 ### Trading Workflows
 
@@ -71,7 +71,7 @@ Provide a single source of truth for API surface coverage, test depth, and opera
 | Get Option Expirations             | ✅     |                                          | U     | —                       |
 | Lookup Option Symbols              | ⬜     | Parser not implemented.                  | —     | —                       |
 | Get Historical Quotes              | ⬜     | No request layer.                        | —     | —                       |
-| Get Time & Sales                   | 🟡     | `Series` model + request; tests missing. | —     | Throttle controls TBD   |
+| Get Time & Sales                   | 🟡     | `TradierBrokerageTimeSeriesModel` + request; tests missing. | —     | Throttle controls TBD   |
 | Get ETB Securities                 | ⬜     |                                          | —     | —                       |
 | Get Clock                          | ✅     |                                          | U     | —                       |
 | Get Calendar                       | ✅     |                                          | U     | —                       |

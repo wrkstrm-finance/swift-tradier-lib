@@ -319,7 +319,7 @@ struct AccountOrdersTests {
       }
       """.data(using: .utf8)!
     let decoded = try Tradier.decoder.decode(
-      Tradier.OrdersRoot.self,
+      Tradier.TradierBrokerageOrdersRootModel.self,
       from: json,
     )
     #expect(decoded.orders.count == 4)
@@ -351,7 +351,7 @@ struct AccountOrdersTests {
       }
       """.data(using: .utf8)!
     let decoded = try Tradier.decoder.decode(
-      Tradier.OrderRoot.self,
+      Tradier.TradierBrokerageOrderRootModel.self,
       from: json,
     )
     #expect(decoded.order.id == 228_176)
@@ -371,7 +371,7 @@ struct AccountOrdersTests {
       }
       """.data(using: .utf8)!
     let decoded = try Tradier.decoder.decode(
-      Tradier.OrderResultRoot.self,
+      Tradier.TradierBrokerageOrderResultRootModel.self,
       from: json,
     )
     #expect(decoded.order.id == 257_459)

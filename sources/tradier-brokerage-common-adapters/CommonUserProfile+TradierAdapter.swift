@@ -2,8 +2,8 @@ import Foundation
 import CommonBroker
 import TradierLib
 
-extension CommonUserProfile {
-  public init(_ tradierUser: Tradier.UserProfile) {
+extension CommonBrokerageUserProfileModel {
+  public init(_ tradierUser: Tradier.TradierBrokerageUserProfileModel) {
     self.init(
       id: tradierUser.id,
       name: tradierUser.name,

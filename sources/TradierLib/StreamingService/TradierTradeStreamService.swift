@@ -13,7 +13,7 @@ public actor TradierTradeStreamService {
   private let tradierToken: String
   private let notionToken: String
   private let notionDatabaseId: String
-  private let journaler: (@Sendable (Tradier.Transaction) async -> Void)?
+  private let journaler: (@Sendable (Tradier.TradierBrokerageTransactionModel) async -> Void)?
   private var task: Task<Void, Never>?
   private var group: MultiThreadedEventLoopGroup?
   private var socket: WebSocket?
@@ -23,7 +23,7 @@ public actor TradierTradeStreamService {
     tradierToken: String,
     notionToken: String,
     notionDatabaseId: String,
-    journaler: (@Sendable (Tradier.Transaction) async -> Void)? = nil,
+    journaler: (@Sendable (Tradier.TradierBrokerageTransactionModel) async -> Void)? = nil,
   ) {
     self.accountId = accountId
     self.tradierToken = tradierToken
@@ -77,8 +77,11 @@ public actor TradierTradeStreamService {
       !data.isEmpty
     else { return }
     do {
-      let event: AccountEvent = try JSONDecoder().decode(AccountEvent.self, from: data)
-      if event.type == "fill", let transaction: Tradier.Transaction = event.transaction {
+      let event: TradierBrokerageAccountEventModel = try JSONDecoder().decode(
+        TradierBrokerageAccountEventModel.self,
+        from: data
+      )
+      if event.type == "fill", let transaction: Tradier.TradierBrokerageTransactionModel = event.transaction {
         if let journaler {
           await journaler(transaction)
         } else {
@@ -91,7 +94,7 @@ public actor TradierTradeStreamService {
     }
   }
 
-  private func journal(transaction: Tradier.Transaction) async {
+  private func journal(transaction: Tradier.TradierBrokerageTransactionModel) async {
     let service: Notion.CodableService = .init(token: notionToken)
     let parentEnum: Notion.ParentEnum = .database(.init(notionDatabaseId))
     do {

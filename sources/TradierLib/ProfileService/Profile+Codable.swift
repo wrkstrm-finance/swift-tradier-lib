@@ -1,11 +1,11 @@
 import Foundation
 
 extension Tradier {
-  public struct ProfileRoot: Decodable, Sendable {
-    public var profile: AccountProfile
+  public struct TradierBrokerageProfileRootModel: Decodable, Sendable {
+    public var profile: TradierBrokerageAccountProfileModel
   }
 
-  public struct AccountProfile: Decodable, Sendable {
+  public struct TradierBrokerageAccountProfileModel: Decodable, Sendable {
     public var accountNumber: String?
     public var classification: String?
     public var dayTrader: Bool?
@@ -13,8 +13,8 @@ extension Tradier {
     public var accountType: String?
     public var lastUpdated: Date?
     public var status: String?
-    public var name: ProfileName?
-    public var address: ProfileAddress?
+    public var name: TradierBrokerageProfileNameModel?
+    public var address: TradierBrokerageProfileAddressModel?
     public var email: String?
     public var phone: String?
 
@@ -29,12 +29,12 @@ extension Tradier {
     }
   }
 
-  public struct ProfileName: Decodable, Sendable {
+  public struct TradierBrokerageProfileNameModel: Decodable, Sendable {
     public var first: String?
     public var last: String?
   }
 
-  public struct ProfileAddress: Decodable, Sendable {
+  public struct TradierBrokerageProfileAddressModel: Decodable, Sendable {
     public var address1: String?
     public var address2: String?
     public var city: String?

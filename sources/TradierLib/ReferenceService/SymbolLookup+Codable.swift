@@ -1,15 +1,15 @@
 import Foundation
 
 extension Tradier {
-  public struct LookupRoot: Decodable, Sendable {
-    public var securities: Securities?
+  public struct TradierBrokerageLookupRootModel: Decodable, Sendable {
+    public var securities: TradierBrokerageSecuritiesModel?
   }
 
-  public struct Securities: Decodable, Sendable {
-    public var security: [Security]?
+  public struct TradierBrokerageSecuritiesModel: Decodable, Sendable {
+    public var security: [TradierBrokerageSecurityModel]?
   }
 
-  public struct Security: Decodable, Sendable, Hashable {
+  public struct TradierBrokerageSecurityModel: Decodable, Sendable, Hashable {
     public var symbol: String
     public var exchange: String?
     public var type: String?

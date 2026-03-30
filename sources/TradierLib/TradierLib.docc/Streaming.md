@@ -16,8 +16,8 @@ The client exposes an `AsyncStream` of `TradierEvent` values.
 ### Event Types
 
 - ``TradierEvent``
-- ``Quote``
-- ``Trade``
-- ``Summary``
-- ``TimeSale``
-- ``TradeX``
+- ``TradierBrokerageQuoteModel``
+- ``TradierBrokerageTradeModel``
+- ``TradierBrokerageSummaryModel``
+- ``TradierBrokerageTimeSaleModel``
+- ``TradierBrokerageTradeXModel``

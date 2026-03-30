@@ -9,7 +9,7 @@ import WrkstrmNetworking
 /// Tradier-backed implementation for fetching a single option quote by OSI symbol.
 /// Example symbol: "AAPL250118C00180000"
 public struct TradierOptionQuoteService: CommonBroker.OptionQuoteService, Sendable {
-  public typealias OptionQuote = Tradier.Quote
+  public typealias OptionQuote = Tradier.TradierBrokerageQuoteModel
   public nonisolated let serviceName: String = "Tradier"
   public nonisolated let serviceType: ServiceType
   private let service: Tradier.CodableService
@@ -40,15 +40,15 @@ public struct TradierOptionQuoteService: CommonBroker.OptionQuoteService, Sendab
     }
   }
 
-  public func optionQuote(for symbol: String) async throws -> Tradier.Quote {
+  public func optionQuote(for symbol: String) async throws -> Tradier.TradierBrokerageQuoteModel {
     // Use multi-quote endpoint with greeks enabled for option symbols.
     let request = Tradier.MultiQuotesRequest(symbols: [symbol], greeks: true)
 
     // Disambiguate the response type for the decoder.
-    let root: Tradier.MultiQuotesRoot = try await service.client.send(request)
+    let root: Tradier.TradierBrokerageMultiQuotesRootModel = try await service.client.send(request)
 
-    // MultiQuotesRoot -> MultiQuotes -> [Quote]
-    guard let quotes: [Tradier.Quote] = root.quotes?.quote, !quotes.isEmpty else {
+    // TradierBrokerageMultiQuotesRootModel -> TradierBrokerageMultiQuotesModel -> [TradierBrokerageQuoteModel]
+    guard let quotes: [Tradier.TradierBrokerageQuoteModel] = root.quotes?.quote, !quotes.isEmpty else {
       throw StringError("No option quote for \(symbol)")
     }
 

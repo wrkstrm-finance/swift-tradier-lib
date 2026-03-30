@@ -5,23 +5,23 @@ import Foundation
 
 extension Tradier.CodableService {
   /// Returns balances for the specified account id.
-  public func accountBalances(for accountId: String) async throws -> Tradier.Balance {
+  public func accountBalances(for accountId: String) async throws -> Tradier.TradierBrokerageBalanceModel {
     let request: Tradier.AccountBalancesRequest = .init(accountId: accountId)
-    let response: Tradier.BalancesRoot = try await client.send(request)
+    let response: Tradier.TradierBrokerageBalancesRootModel = try await client.send(request)
     return response.balances
   }
 
   /// Returns profile details for the specified account id.
-  public func accountProfile(for accountId: String) async throws -> Tradier.AccountProfile {
+  public func accountProfile(for accountId: String) async throws -> Tradier.TradierBrokerageAccountProfileModel {
     let request: Tradier.AccountProfileRequest = .init(accountId: accountId)
-    let response: Tradier.ProfileRoot = try await client.send(request)
+    let response: Tradier.TradierBrokerageProfileRootModel = try await client.send(request)
     return response.profile
   }
 
   /// Returns the authenticated user’s profile.
-  public func userProfile() async throws -> Tradier.UserProfile {
+  public func userProfile() async throws -> Tradier.TradierBrokerageUserProfileModel {
     let request: Tradier.UserProfileRequest = .init()
-    let response: Tradier.UserProfileRoot = try await client.send(request)
+    let response: Tradier.TradierBrokerageUserProfileRootModel = try await client.send(request)
     return response.profile
   }
 }

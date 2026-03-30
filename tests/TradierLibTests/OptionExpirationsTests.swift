@@ -70,8 +70,8 @@ struct OptionExpirationsTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded: Tradier.OptionExpirationsRoot =
-      try Tradier.decoder.decode(Tradier.OptionExpirationsRoot.self, from: json)
+    let decoded: Tradier.TradierBrokerageOptionExpirationsRootModel =
+      try Tradier.decoder.decode(Tradier.TradierBrokerageOptionExpirationsRootModel.self, from: json)
     let first: Option.Expiration = try #require(decoded.expirations.expiration.first)
     #expect(first.date == "2024-01-19")
     #expect(first.expirationType == "monthly")

@@ -2,12 +2,12 @@ import Foundation
 import SwiftUniversalMain
 
 extension Tradier {
-  public struct HistoryRoot: Codable, Sendable {
-    public let history: History?
+  public struct TradierBrokerageHistoryRootModel: Codable, Sendable {
+    public let history: TradierBrokerageHistoryModel?
   }
 
-  public struct History: Codable, Sendable, Equatable, Hashable {
-    public let event: [Transaction]?
+  public struct TradierBrokerageHistoryModel: Codable, Sendable, Equatable, Hashable {
+    public let event: [TradierBrokerageTransactionModel]?
   }
 
   public enum HistoryEventType: String, Sendable, Equatable, Hashable {
@@ -16,7 +16,7 @@ extension Tradier {
     case transfer
   }
 
-  public struct TradeEvent: Codable, Sendable, Equatable, Hashable {
+  public struct TradierBrokerageTradeEventModel: Codable, Sendable, Equatable, Hashable {
     public let commission: Double?
     public let description: String?
     public let price: Double?
@@ -25,17 +25,17 @@ extension Tradier {
     public let tradeType: String?
   }
 
-  public struct ACHEvent: Codable, Sendable, Equatable, Hashable {
+  public struct TradierBrokerageACHEventModel: Codable, Sendable, Equatable, Hashable {
     public let description: String?
     public let quantity: Double?
   }
 
-  public struct TransferEvent: Codable, Sendable, Equatable, Hashable {
+  public struct TradierBrokerageTransferEventModel: Codable, Sendable, Equatable, Hashable {
     public let description: String?
     public let quantity: Double?
   }
 
-  public struct Transaction: Codable, Identifiable, Sendable, Equatable, Hashable {
+  public struct TradierBrokerageTransactionModel: Codable, Identifiable, Sendable, Equatable, Hashable {
     public let id: Int?
     public let date: Date?
     public let amount: Double?
@@ -56,17 +56,17 @@ extension Tradier {
       self.details = details
     }
 
-    public var trade: TradeEvent? {
+    public var trade: TradierBrokerageTradeEventModel? {
       if case .trade(let event) = details { return event }
       return nil
     }
 
-    public var ach: ACHEvent? {
+    public var ach: TradierBrokerageACHEventModel? {
       if case .ach(let event) = details { return event }
       return nil
     }
 
-    public var transfer: TransferEvent? {
+    public var transfer: TradierBrokerageTransferEventModel? {
       if case .transfer(let event) = details { return event }
       return nil
     }
@@ -90,15 +90,15 @@ extension Tradier {
 
       switch type {
       case "trade":
-        let value = try container.decodeIfPresent(TradeEvent.self, forKey: .trade)
+        let value = try container.decodeIfPresent(TradierBrokerageTradeEventModel.self, forKey: .trade)
         details = value.map { .trade($0) }
 
       case "ach":
-        let value = try container.decodeIfPresent(ACHEvent.self, forKey: .ach)
+        let value = try container.decodeIfPresent(TradierBrokerageACHEventModel.self, forKey: .ach)
         details = value.map { .ach($0) }
 
       case "transfer":
-        let value = try container.decodeIfPresent(TransferEvent.self, forKey: .transfer)
+        let value = try container.decodeIfPresent(TradierBrokerageTransferEventModel.self, forKey: .transfer)
         details = value.map { .transfer($0) }
 
       default:
@@ -129,18 +129,18 @@ extension Tradier {
     }
 
     public enum Details: Codable, Sendable, Equatable, Hashable {
-      case trade(TradeEvent)
-      case ach(ACHEvent)
-      case transfer(TransferEvent)
+      case trade(TradierBrokerageTradeEventModel)
+      case ach(TradierBrokerageACHEventModel)
+      case transfer(TradierBrokerageTransferEventModel)
       case unknown
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        if let trade = try? container.decode(TradeEvent.self) {
+        if let trade = try? container.decode(TradierBrokerageTradeEventModel.self) {
           self = .trade(trade)
-        } else if let ach = try? container.decode(ACHEvent.self) {
+        } else if let ach = try? container.decode(TradierBrokerageACHEventModel.self) {
           self = .ach(ach)
-        } else if let transfer = try? container.decode(TransferEvent.self) {
+        } else if let transfer = try? container.decode(TradierBrokerageTransferEventModel.self) {
           self = .transfer(transfer)
         } else {
           self = .unknown

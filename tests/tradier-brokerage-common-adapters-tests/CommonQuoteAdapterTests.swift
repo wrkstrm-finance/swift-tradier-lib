@@ -37,8 +37,8 @@ func commonQuote_adapts_from_tradier_quote() throws {
     "\"last_volume\":200",
   ]
   let json = "{" + fields.joined(separator: ",") + "}"
-  let q: Tradier.Quote = try TestDecodeHelper.decode(json, as: Tradier.Quote.self)
-  let cq = CommonQuote(q)
+  let q: Tradier.TradierBrokerageQuoteModel = try TestDecodeHelper.decode(json, as: Tradier.TradierBrokerageQuoteModel.self)
+  let cq = CommonBrokerageQuoteModel(q)
 
   #expect(cq.symbol == symbol)
   #expect(cq.symbolDescription == "Apple Inc.")

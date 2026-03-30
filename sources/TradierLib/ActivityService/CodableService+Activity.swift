@@ -1,6 +1,6 @@
 // Overview: Activity and gain/loss queries for Tradier.CodableService.
 // Exposes account history and closed positions (gain/loss).
-// Related: History+Codable.swift, GainLoss+Codable.swift, CodableURLRequest+Activity.swift
+// Related: TradierBrokerageHistoryModel+Codable.swift, TradierBrokerageGainLossModel+Codable.swift, CodableURLRequest+Activity.swift
 import Foundation
 
 extension Tradier.CodableService {
@@ -10,7 +10,7 @@ extension Tradier.CodableService {
     start: Date? = nil,
     end: Date? = nil,
     type: Tradier.HistoryEventType? = nil,
-  ) async throws -> [Tradier.Transaction] {
+  ) async throws -> [Tradier.TradierBrokerageTransactionModel] {
     let request: Tradier.AccountHistoryRequest = .init(
       accountId: accountId,
       start: start,
@@ -27,7 +27,7 @@ extension Tradier.CodableService {
     start: Date? = nil,
     end: Date? = nil,
     type: Tradier.HistoryEventType? = nil,
-  ) async throws -> [Tradier.Transaction] {
+  ) async throws -> [Tradier.TradierBrokerageTransactionModel] {
     try await accountHistory(
       for: accountId,
       start: start,
@@ -46,7 +46,7 @@ extension Tradier.CodableService {
     start: Date? = nil,
     end: Date? = nil,
     symbol: String? = nil,
-  ) async throws -> [Tradier.ClosedPosition] {
+  ) async throws -> [Tradier.TradierBrokerageClosedPositionModel] {
     let request: Tradier.AccountGainLossRequest = .init(
       accountId: accountId,
       page: page,
@@ -57,7 +57,7 @@ extension Tradier.CodableService {
       end: end,
       symbol: symbol,
     )
-    let response: Tradier.GainLossRoot = try await client.send(request)
+    let response: Tradier.TradierBrokerageGainLossRootModel = try await client.send(request)
     return response.gainloss?.closedPosition ?? []
   }
 }

@@ -2,35 +2,35 @@ import Foundation
 import SwiftUniversalMain
 
 extension Tradier {
-  public struct PositionsRoot: Decodable, Sendable {
-    public var positions: Positions?
+  public struct TradierBrokeragePositionsRootModel: Decodable, Sendable {
+    public var positions: TradierBrokeragePositionsModel?
 
     private enum CodingKeys: String, CodingKey { case positions }
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       positions = try? container.decodeAllowingNullOrEmptyObject(
-        Tradier.Positions.self,
+        Tradier.TradierBrokeragePositionsModel.self,
         forKey: .positions,
       )
     }
   }
 
-  public struct Positions: Decodable, Sendable {
-    public var position: [Position]?
+  public struct TradierBrokeragePositionsModel: Decodable, Sendable {
+    public var position: [TradierBrokeragePositionModel]?
 
     private enum CodingKeys: String, CodingKey { case position }
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       position = try container.decodeArrayAllowingNullOrSingle(
-        Tradier.Position.self,
+        Tradier.TradierBrokeragePositionModel.self,
         forKey: .position,
       )
     }
   }
 
-  public struct Position: Decodable, Hashable, Sendable {
+  public struct TradierBrokeragePositionModel: Decodable, Hashable, Sendable {
     public var symbol: String
     public var quantity: Double
     public var costBasis: Double?

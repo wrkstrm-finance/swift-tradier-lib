@@ -7,7 +7,7 @@ import WrkstrmNetworking
 
 @testable import TradierLib
 
-// Fake transport that returns a canned UserProfile JSON and 200 OK.
+// Fake transport that returns a canned TradierBrokerageUserProfileModel JSON and 200 OK.
 private struct FakeTransport: HTTP.Transport {
   let data: Data
   func execute(_ request: URLRequest) async throws -> (Data, HTTPURLResponse) {
@@ -25,9 +25,9 @@ private struct FakeTransport: HTTP.Transport {
 struct StubUserProfileDecoder: SwiftUniversalFoundation.JSONDataDecoding {
   let base = JSONDecoder.commonDateParsing
   func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
-    if type == Tradier.UserProfileRoot.self {
-      let stub = Tradier.UserProfileRoot(
-        profile: Tradier.UserProfile(accounts: [], id: "stub", name: "stub"),
+    if type == Tradier.TradierBrokerageUserProfileRootModel.self {
+      let stub = Tradier.TradierBrokerageUserProfileRootModel(
+        profile: Tradier.TradierBrokerageUserProfileModel(accounts: [], id: "stub", name: "stub"),
       )
       // Force-cast to satisfy the generic return
       return unsafeBitCast(stub, to: T.self)

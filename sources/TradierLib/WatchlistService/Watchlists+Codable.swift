@@ -2,23 +2,23 @@ import Foundation
 import SwiftUniversalMain
 
 extension Tradier {
-  public struct WatchlistsRoot: Decodable, Sendable {
-    public var watchlists: Watchlists
+  public struct TradierBrokerageWatchlistsRootModel: Decodable, Sendable {
+    public var watchlists: TradierBrokerageWatchlistCollectionModel
 
-    public struct Watchlists: Decodable, Sendable {
-      public var watchlist: [Watchlist]
+    public struct TradierBrokerageWatchlistCollectionModel: Decodable, Sendable {
+      public var watchlist: [TradierBrokerageWatchlistModel]
     }
   }
 
-  public struct WatchlistRoot: Decodable, Sendable {
-    public var watchlist: Watchlist
+  public struct TradierBrokerageWatchlistRootModel: Decodable, Sendable {
+    public var watchlist: TradierBrokerageWatchlistModel
   }
 
-  public struct Watchlist: Decodable, Sendable, Identifiable {
+  public struct TradierBrokerageWatchlistModel: Decodable, Sendable, Identifiable {
     public var name: String
     public var id: String
     public var publicId: String
-    public var items: Items?
+    public var items: TradierBrokerageWatchlistItemsModel?
 
     enum CodingKeys: String, CodingKey {
       case name
@@ -34,17 +34,17 @@ extension Tradier {
       id = try container.decode(String.self, forKey: .id)
       publicId = try container.decode(String.self, forKey: .publicId)
       items = try container.decodeAllowingNullOrEmptyObject(
-        Items.self,
+        TradierBrokerageWatchlistItemsModel.self,
         forKey: .items,
       )
     }
 
-    public struct Items: Decodable, Sendable {
-      public var item: [Item]
+    public struct TradierBrokerageWatchlistItemsModel: Decodable, Sendable {
+      public var item: [TradierBrokerageWatchlistItemModel]
 
       private enum CodingKeys: String, CodingKey { case item }
 
-      public init(item: [Item]) {
+      public init(item: [TradierBrokerageWatchlistItemModel]) {
         self.item = item
       }
 
@@ -53,13 +53,13 @@ extension Tradier {
           try decoder.container(keyedBy: CodingKeys.self)
         item =
           try container.decodeArrayAllowingNullOrSingle(
-            Item.self,
+            TradierBrokerageWatchlistItemModel.self,
             forKey: .item,
           ) ?? []
       }
     }
 
-    public struct Item: Decodable, Sendable {
+    public struct TradierBrokerageWatchlistItemModel: Decodable, Sendable {
       public var symbol: String
       public var id: String
     }

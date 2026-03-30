@@ -42,7 +42,7 @@ struct AccountBalancesTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded = try Tradier.decoder.decode(Tradier.BalancesRoot.self, from: json)
+    let decoded = try Tradier.decoder.decode(Tradier.TradierBrokerageBalancesRootModel.self, from: json)
     #expect(decoded.balances.totalCash == 1000.0)
     #expect(decoded.balances.cash?.cashAvailable == 500.0)
   }

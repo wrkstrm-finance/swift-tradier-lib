@@ -10,7 +10,7 @@ enum TestDecodeHelper {
     return try decoder.decode(T.self, from: data)
   }
 
-  static func makeTradierQuote(symbol: String, last: Double? = nil) throws -> Tradier.Quote {
+  static func makeTradierQuote(symbol: String, last: Double? = nil) throws -> Tradier.TradierBrokerageQuoteModel {
     var fields: [String] = [
       "\"symbol\":\"\(symbol)\"",
       "\"description\":\"\(symbol)\"",
@@ -28,18 +28,18 @@ enum TestDecodeHelper {
     ]
     if let last { fields.append("\"last\":\(last)") }
     let json = "{" + fields.joined(separator: ",") + "}"
-    return try decode(json, as: Tradier.Quote.self)
+    return try decode(json, as: Tradier.TradierBrokerageQuoteModel.self)
   }
 
-  static func makeTradierUserProfile(id: String, name: String) throws -> Tradier.UserProfile {
+  static func makeTradierUserProfile(id: String, name: String) throws -> Tradier.TradierBrokerageUserProfileModel {
     let json = "{" + "\"accounts\":[],\"id\":\"\(id)\",\"name\":\"\(name)\"" + "}"
-    return try decode(json, as: Tradier.UserProfile.self)
+    return try decode(json, as: Tradier.TradierBrokerageUserProfileModel.self)
   }
 
   static func makeTradierAccountProfile(
     accountId: String, status: String? = nil, classification: String? = nil,
     accountName: String? = nil,
-  ) throws -> Tradier.AccountProfile {
+  ) throws -> Tradier.TradierBrokerageAccountProfileModel {
     var fields = ["\"account_number\":\"\(accountId)\""]
     if let status { fields.append("\"status\":\"\(status)\"") }
     if let classification { fields.append("\"classification\":\"\(classification)\"") }
@@ -47,13 +47,13 @@ enum TestDecodeHelper {
       fields.append("\"name\":{\"first\":\"\(accountName)\",\"last\":\"\(accountName)\"}")
     }
     let json = "{" + fields.joined(separator: ",") + "}"
-    return try decode(json, as: Tradier.AccountProfile.self)
+    return try decode(json, as: Tradier.TradierBrokerageAccountProfileModel.self)
   }
 
   static func makeTradierBalance(
     cashAvailable: Double? = nil, totalEquity: Double? = nil, maintenanceMargin: Double? = nil,
     buyingPower: Double? = nil,
-  ) throws -> Tradier.Balance {
+  ) throws -> Tradier.TradierBrokerageBalanceModel {
     var fields: [String] = []
     if let cashAvailable { fields.append("\"cash\":{\"cash_available\":\(cashAvailable)}") }
     if let totalEquity { fields.append("\"total_equity\":\(totalEquity)") }
@@ -64,6 +64,6 @@ enum TestDecodeHelper {
       fields.append("\"margin\":{\(marginFields.joined(separator: ","))}")
     }
     let json = "{" + fields.joined(separator: ",") + "}"
-    return try decode(json, as: Tradier.Balance.self)
+    return try decode(json, as: Tradier.TradierBrokerageBalanceModel.self)
   }
 }

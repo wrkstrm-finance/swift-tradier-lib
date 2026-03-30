@@ -8,12 +8,12 @@ This page documents the local micro-benchmarks comparing Foundation's `JSONDecod
 - Frame-window runs per frame at 144 Hz (~6.944 ms).
 - Aggregate stats across 25 windows: mean, median, p95 (runs/frame).
 - Multiple payloads:
-  - ``user_profile`` (UserProfileRoot)
-  - ``positions`` (PositionsRoot)
+  - ``user_profile`` (TradierBrokerageUserProfileRootModel)
+  - ``positions`` (TradierBrokeragePositionsRootModel)
   - ``positions_large`` (100 positions)
-  - ``option_expirations`` (OptionExpirationsRoot)
-  - ``quotes`` (SingleQuoteRoot)
-  - ``option_chain`` (OptionChainRoot)
+  - ``option_expirations`` (TradierBrokerageOptionExpirationsRootModel)
+  - ``quotes`` (TradierBrokerageSingleQuoteRootModel)
+  - ``option_chain`` (TradierBrokerageOptionChainRootModel)
 
 ## How to Run
 

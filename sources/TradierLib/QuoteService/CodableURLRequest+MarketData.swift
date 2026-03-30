@@ -4,7 +4,7 @@ import WrkstrmNetworking
 
 extension Tradier {
   public struct ClockRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.ClockRoot
+    public typealias ResponseType = Tradier.TradierBrokerageClockRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/clock" }
     public var options: HTTP.Request.Options
@@ -15,7 +15,7 @@ extension Tradier {
   }
 
   public struct QuoteRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.SingleQuoteRoot
+    public typealias ResponseType = Tradier.TradierBrokerageSingleQuoteRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/quotes" }
     public var options: HTTP.Request.Options
@@ -29,7 +29,7 @@ extension Tradier {
   }
 
   public struct MultiQuotesRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.MultiQuotesRoot
+    public typealias ResponseType = Tradier.TradierBrokerageMultiQuotesRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/quotes" }
     public var options: HTTP.Request.Options
@@ -43,7 +43,7 @@ extension Tradier {
   }
 
   public struct OptionChainRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = OptionChainRoot
+    public typealias ResponseType = TradierBrokerageOptionChainRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/options/chains" }
     public var options: HTTP.Request.Options
@@ -58,7 +58,7 @@ extension Tradier {
   }
 
   public struct OptionExpirationsRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = OptionExpirationsRoot
+    public typealias ResponseType = TradierBrokerageOptionExpirationsRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/options/expirations" }
     public var options: HTTP.Request.Options
@@ -81,7 +81,7 @@ extension Tradier {
   }
 
   public struct MarketCalendarRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.MarketCalendarRoot
+    public typealias ResponseType = Tradier.TradierBrokerageMarketCalendarRootModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/calendar" }
     public var options: HTTP.Request.Options
@@ -95,7 +95,7 @@ extension Tradier {
   }
 
   public struct TimeSalesRequest: HTTP.CodableURLRequest {
-    public typealias ResponseType = Tradier.Series
+    public typealias ResponseType = Tradier.TradierBrokerageTimeSeriesModel
     public var method: HTTP.Method { .get }
     public var path: String { "markets/timesales" }
     public var options: HTTP.Request.Options

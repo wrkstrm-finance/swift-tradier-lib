@@ -221,19 +221,19 @@ public final class TradierEventsClient: @unchecked Sendable {
     {
       switch type {
       case "quote":
-        if let value = try? decoder.decode(Quote.self, from: data) { return .quote(value) }
+        if let value = try? decoder.decode(TradierBrokerageQuoteModel.self, from: data) { return .quote(value) }
 
       case "trade":
-        if let value = try? decoder.decode(Trade.self, from: data) { return .trade(value) }
+        if let value = try? decoder.decode(TradierBrokerageTradeModel.self, from: data) { return .trade(value) }
 
       case "summary":
-        if let value = try? decoder.decode(Summary.self, from: data) { return .summary(value) }
+        if let value = try? decoder.decode(TradierBrokerageSummaryModel.self, from: data) { return .summary(value) }
 
       case "timesale":
-        if let value = try? decoder.decode(TimeSale.self, from: data) { return .timesale(value) }
+        if let value = try? decoder.decode(TradierBrokerageTimeSaleModel.self, from: data) { return .timesale(value) }
 
       case "tradex":
-        if let value = try? decoder.decode(TradeX.self, from: data) { return .tradex(value) }
+        if let value = try? decoder.decode(TradierBrokerageTradeXModel.self, from: data) { return .tradex(value) }
 
       default:
         return .unknown(type, obj)

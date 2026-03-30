@@ -4,11 +4,11 @@ import Foundation
 
 /// Discriminated union of parsed market streaming messages.
 public enum TradierEvent: @unchecked Sendable {
-  case quote(Quote)
-  case trade(Trade)
-  case summary(Summary)
-  case timesale(TimeSale)
-  case tradex(TradeX)
+  case quote(TradierBrokerageQuoteModel)
+  case trade(TradierBrokerageTradeModel)
+  case summary(TradierBrokerageSummaryModel)
+  case timesale(TradierBrokerageTimeSaleModel)
+  case tradex(TradierBrokerageTradeXModel)
   case unknown(String, [String: Any])
 
   /// Convenience accessor for the symbol, if present in the event.
@@ -25,7 +25,7 @@ public enum TradierEvent: @unchecked Sendable {
 }
 
 /// Best bid/ask quote update.
-public struct Quote: Codable, Sendable {
+public struct TradierBrokerageQuoteModel: Codable, Sendable {
   public let type: String
   public let symbol: String
   public let bid: Double?
@@ -39,7 +39,7 @@ public struct Quote: Codable, Sendable {
 }
 
 /// Trade print update.
-public struct Trade: Codable, Sendable {
+public struct TradierBrokerageTradeModel: Codable, Sendable {
   public let type: String
   public let symbol: String
   public let exch: String?
@@ -51,7 +51,7 @@ public struct Trade: Codable, Sendable {
 }
 
 /// Session summary update (open/high/low/prevClose).
-public struct Summary: Codable, Sendable {
+public struct TradierBrokerageSummaryModel: Codable, Sendable {
   public let type: String
   public let symbol: String
   public let open: String?
@@ -61,7 +61,7 @@ public struct Summary: Codable, Sendable {
 }
 
 /// Time and sales update including size and session.
-public struct TimeSale: Codable, Sendable {
+public struct TradierBrokerageTimeSaleModel: Codable, Sendable {
   public let type: String
   public let symbol: String
   public let exch: String?
@@ -78,7 +78,7 @@ public struct TimeSale: Codable, Sendable {
 }
 
 /// Extended trade update with cumulative volume.
-public struct TradeX: Codable, Sendable {
+public struct TradierBrokerageTradeXModel: Codable, Sendable {
   public let type: String
   public let symbol: String
   public let exch: String?

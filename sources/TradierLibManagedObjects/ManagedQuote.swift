@@ -13,25 +13,25 @@ extension CodingUserInfoKey {
 
 public enum Managed: Sendable {
   public struct QuotesRoot: Codable, Sendable {
-    public let quotes: Quotes?
+    public let quotes: TradierBrokerageQuotesModel?
   }
 
-  public struct MultiQuotesRoot: Codable, Sendable {
-    public let quotes: MultiQuotes?
+  public struct TradierBrokerageMultiQuotesRootModel: Codable, Sendable {
+    public let quotes: TradierBrokerageMultiQuotesModel?
   }
 
-  public struct Quotes: Codable, Sendable {
-    public let quote: Quote?
+  public struct TradierBrokerageQuotesModel: Codable, Sendable {
+    public let quote: TradierBrokerageQuoteModel?
   }
 
-  public struct MultiQuotes: Codable, Sendable {
-    public let quotes: [Quotes]?
+  public struct TradierBrokerageMultiQuotesModel: Codable, Sendable {
+    public let quotes: [TradierBrokerageQuotesModel]?
   }
 
-  @objc(Quote)
-  public class Quote: NSManagedObject, Codable, @unchecked Sendable {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Quote> {
-      NSFetchRequest<Quote>(entityName: "Quote")
+  @objc(TradierBrokerageQuoteModel)
+  public class TradierBrokerageQuoteModel: NSManagedObject, Codable, @unchecked Sendable {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<TradierBrokerageQuoteModel> {
+      NSFetchRequest<TradierBrokerageQuoteModel>(entityName: "TradierBrokerageQuoteModel")
     }
 
     enum CodingKeys: String, CodingKey {
@@ -135,7 +135,7 @@ public enum Managed: Sendable {
         throw DecodingError.dataCorrupted(
           .init(
             codingPath: decoder.codingPath,
-            debugDescription: "Failed to decode Quote: missing managedObjectContext or entity",
+            debugDescription: "Failed to decode TradierBrokerageQuoteModel: missing managedObjectContext or entity",
           ))
       }
 

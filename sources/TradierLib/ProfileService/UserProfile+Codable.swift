@@ -1,12 +1,12 @@
 import Foundation
 
 extension Tradier {
-  public struct UserProfileRoot: Decodable, Sendable {
-    public var profile: UserProfile
+  public struct TradierBrokerageUserProfileRootModel: Decodable, Sendable {
+    public var profile: TradierBrokerageUserProfileModel
   }
 
-  public struct UserProfile: Decodable, Sendable {
-    public var accounts: [Account]
+  public struct TradierBrokerageUserProfileModel: Decodable, Sendable {
+    public var accounts: [TradierBrokerageUserAccountModel]
     public var id: String?
     public var name: String?
 
@@ -16,7 +16,7 @@ extension Tradier {
       case name
     }
 
-    public init(accounts: [Account], id: String? = nil, name: String? = nil) {
+    public init(accounts: [TradierBrokerageUserAccountModel], id: String? = nil, name: String? = nil) {
       self.accounts = accounts
       self.id = id
       self.name = name
@@ -24,10 +24,10 @@ extension Tradier {
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      if let single = try? container.decode(Account.self, forKey: .accounts) {
+      if let single = try? container.decode(TradierBrokerageUserAccountModel.self, forKey: .accounts) {
         accounts = [single]
       } else {
-        accounts = try container.decodeIfPresent([Account].self, forKey: .accounts) ?? []
+        accounts = try container.decodeIfPresent([TradierBrokerageUserAccountModel].self, forKey: .accounts) ?? []
       }
       id = try container.decodeIfPresent(String.self, forKey: .id)
       name = try container.decodeIfPresent(String.self, forKey: .name)
@@ -44,7 +44,7 @@ extension Tradier {
     ///   - status: The current status of the account (e.g., active, closed).
     ///   - type: The type of account (e.g., cash, margin).
     ///   - lastUpdateDate: The date the account was last updated.
-    public struct Account: Decodable, Sendable {
+    public struct TradierBrokerageUserAccountModel: Decodable, Sendable {
       /// The unique identifier for the account.
       public var accountNumber: String
       /// The classification of the account (e.g., individual, joint).

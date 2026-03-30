@@ -81,7 +81,7 @@ struct TradierTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded = try Tradier.decoder.decode(Tradier.ClockRoot.self, from: json)
+    let decoded = try Tradier.decoder.decode(Tradier.TradierBrokerageClockRootModel.self, from: json)
     #expect(decoded.clock.state == .open)
     #expect(decoded.clock.nextState == .postmarket)
   }
@@ -192,7 +192,7 @@ struct TradierTests {
       }
       """.data(using: .utf8)!
     let decoded = try Tradier.decoder.decode(
-      Tradier.HistoryRoot.self,
+      Tradier.TradierBrokerageHistoryRootModel.self,
       from: json,
     )
     let events = decoded.history?.event
@@ -221,7 +221,7 @@ struct TradierTests {
       }
       """.data(using: .utf8)!
     let decoded = try Tradier.decoder.decode(
-      Tradier.HistoryRoot.self,
+      Tradier.TradierBrokerageHistoryRootModel.self,
       from: json,
     )
     let event = decoded.history?.event?.first
@@ -246,7 +246,7 @@ struct TradierTests {
         }
       }
       """.data(using: .utf8)!
-    let decoded = try Tradier.decoder.decode(Tradier.PositionsRoot.self, from: json)
+    let decoded = try Tradier.decoder.decode(Tradier.TradierBrokeragePositionsRootModel.self, from: json)
     let positions = decoded.positions?.position
     #expect(positions?.count == 1)
     let position = positions?.first
