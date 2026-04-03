@@ -11,6 +11,10 @@ import ReerJSONParserAdapter
 
 @Suite("JSON decoding performance comparisons")
 struct PerformanceDecodingTests {
+  private func currentTime() -> TimeInterval {
+    Date().timeIntervalSinceReferenceDate
+  }
+
   @Test
   func compareUserProfileDecoding() throws {
     // Load sample payload (existing test resource)
@@ -23,24 +27,24 @@ struct PerformanceDecodingTests {
 
     // Baseline: Foundation JSONDecoder
     let foundationDecoder = JSONDecoder.commonDateParsing
-    let foundationStart = CFAbsoluteTimeGetCurrent()
+    let foundationStart = currentTime()
     var fCount = 0
     for _ in 0..<200 {  // warm + repeat
       _ = try foundationDecoder.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
       fCount += 1
     }
-    let foundationElapsed = CFAbsoluteTimeGetCurrent() - foundationStart
+    let foundationElapsed = currentTime() - foundationStart
 
     // Reer: via JSON.Parser adapter (if available)
     #if canImport(ReerJSONParserAdapter)
     let parser = ReerJSONParserAdapter.makeParser()
-    let reerStart = CFAbsoluteTimeGetCurrent()
+    let reerStart = currentTime()
     var rCount = 0
     for _ in 0..<200 {
       _ = try parser.decode(Tradier.TradierBrokerageUserProfileRootModel.self, from: data)
       rCount += 1
     }
-    let reerElapsed = CFAbsoluteTimeGetCurrent() - reerStart
+    let reerElapsed = currentTime() - reerStart
 
     // Report metrics in test output
     print(
@@ -70,9 +74,9 @@ struct PerformanceDecodingTests {
     let data = try Data(contentsOf: url)
 
     func runsWithinBudget(_ decode: () throws -> some Any) rethrows -> Int {
-      let start = CFAbsoluteTimeGetCurrent()
+      let start = currentTime()
       var count = 0
-      while (CFAbsoluteTimeGetCurrent() - start) < frameBudget {
+      while (currentTime() - start) < frameBudget {
         _ = try decode()
         count += 1
       }
@@ -116,13 +120,13 @@ struct PerformanceDecodingTests {
     func measureOps(duration: Double, _ decode: () throws -> Void) rethrows -> (
       ops: Int, perOp: Double
     ) {
-      let start = CFAbsoluteTimeGetCurrent()
+      let start = currentTime()
       var count = 0
-      while (CFAbsoluteTimeGetCurrent() - start) < duration {
+      while (currentTime() - start) < duration {
         try decode()
         count += 1
       }
-      let elapsed = CFAbsoluteTimeGetCurrent() - start
+      let elapsed = currentTime() - start
       return (count, elapsed / Double(max(1, count)))
     }
 
@@ -211,9 +215,9 @@ struct PerformanceDecodingTests {
       var results: [Double] = []
       results.reserveCapacity(windows)
       for _ in 0..<windows {
-        let start = CFAbsoluteTimeGetCurrent()
+        let start = currentTime()
         var count = 0.0
-        while (CFAbsoluteTimeGetCurrent() - start) < budget {
+        while (currentTime() - start) < budget {
           _ = try decode()
           count += 1.0
         }
