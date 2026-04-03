@@ -1,6 +1,8 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import Testing
-import SwiftUniversalFoundation
 import SwiftUniversalFoundation
 import SwiftUniversalMain
 import WrkstrmNetworking
