@@ -20,7 +20,17 @@ private func resolvedPath(_ path: String) -> String {
   return packageDir.appendingPathComponent(path).standardizedFileURL.path
 }
 
+private func pathExists(_ path: String) -> Bool {
+  FileManager.default.fileExists(atPath: resolvedPath(path))
+}
+
 private let useLocalDeps: Bool = envBool("SPM_USE_LOCAL_DEPS")
+private let notionLibPath =
+  "../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib"
+private let jsonParserAdaptersPath =
+  "../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters"
+private let includeNotionLib: Bool = useLocalDeps && pathExists(notionLibPath)
+private let includeJSONParserAdapters: Bool = useLocalDeps && pathExists(jsonParserAdaptersPath)
 
 private func localOrRemote(path: String, url: String, from version: Version) -> Package.Dependency {
   if useLocalDeps {
@@ -39,9 +49,6 @@ ConfigurationService.local.dependencies = [
   .package(
     path: resolvedPath("../../../../../../../swift-universal/private/universal/domain/system/spm/swift-universal-main")
   ),
-  // NotionLib lives in the wrkstrm mono tree (no standalone repo yet).
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -49,21 +56,66 @@ ConfigurationService.local.dependencies = [
   .package(url: "https://github.com/apple/swift-log.git", from: "1.5.0"),
 ]
 
+if includeNotionLib {
+  ConfigurationService.local.dependencies.append(.package(path: resolvedPath(notionLibPath)))
+}
+
+if includeJSONParserAdapters {
+  ConfigurationService.local.dependencies.append(.package(path: resolvedPath(jsonParserAdaptersPath)))
+}
+
 ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/wrkstrm/wrkstrm-networking.git", from: "3.0.5"),
-  .package(url: "https://github.com/swift-universal/swift-universal-foundation.git", from: "3.0.0"),
+  .package(url: "https://github.com/swift-universal/swift-universal-foundation.git", from: "3.0.8"),
   .package(url: "https://github.com/swift-universal/common-log.git", from: "3.0.0"),
   .package(url: "https://github.com/wrkstrm-finance/common-broker.git", from: "0.1.8"),
   .package(url: "https://github.com/swift-universal/swift-universal-main.git", from: "3.0.0"),
-  // NotionLib is currently mono-only (no standalone repo); keep as a local path even in remote mode.
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/api/notion-lib")),
-  .package(path: resolvedPath("../../../../../../../wrkstrm/public/universal/spm/domain/system/JSONParserAdapters")),
   .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.0"),
   .package(url: "https://github.com/vapor/websocket-kit.git", from: "2.6.0"),
   .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
   .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.25.0"),
   .package(url: "https://github.com/apple/swift-log.git", from: "1.5.0"),
 ]
+
+var tradierLibDependencies: [Target.Dependency] = [
+  .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+  .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
+  .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
+  .product(name: "CommonLog", package: "common-log"),
+  .product(name: "WebSocketKit", package: "websocket-kit"),
+  .product(name: "NIO", package: "swift-nio"),
+  .product(name: "NIOHTTP1", package: "swift-nio"),
+  .product(name: "NIOWebSocket", package: "swift-nio"),
+  .product(name: "NIOSSL", package: "swift-nio-ssl"),
+  .product(name: "Logging", package: "swift-log"),
+]
+
+if includeNotionLib {
+  tradierLibDependencies.append(.product(name: "NotionLib", package: "notion-lib"))
+}
+
+var tradierLibTestsDependencies: [Target.Dependency] = [
+  "TradierLib",
+  .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
+  .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+  .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
+  .product(name: "CommonLog", package: "common-log"),
+]
+
+if includeJSONParserAdapters {
+  tradierLibTestsDependencies.append(.product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"))
+}
+
+var tradierJSONPerfCLIDependencies: [Target.Dependency] = [
+  "TradierLib",
+  .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
+  .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
+  .product(name: "ArgumentParser", package: "swift-argument-parser"),
+]
+
+if includeJSONParserAdapters {
+  tradierJSONPerfCLIDependencies.append(.product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"))
+}
 
 let package = Package(
   name: "swift-tradier-lib",
@@ -84,19 +136,7 @@ let package = Package(
   targets: [
     .target(
       name: "TradierLib",
-      dependencies: [
-        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
-        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
-        .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
-        .product(name: "CommonLog", package: "common-log"),
-        .product(name: "NotionLib", package: "notion-lib"),
-        .product(name: "WebSocketKit", package: "websocket-kit"),
-        .product(name: "NIO", package: "swift-nio"),
-        .product(name: "NIOHTTP1", package: "swift-nio"),
-        .product(name: "NIOWebSocket", package: "swift-nio"),
-        .product(name: "NIOSSL", package: "swift-nio-ssl"),
-        .product(name: "Logging", package: "swift-log"),
-      ],
+      dependencies: tradierLibDependencies,
       path: "sources/TradierLib",
     ),
     .target(
@@ -123,14 +163,7 @@ let package = Package(
     // Build test target dependency list conditionally based on local deps flag.
     .testTarget(
       name: "TradierLibTests",
-      dependencies: [
-        "TradierLib",
-        .product(name: "WrkstrmNetworking", package: "wrkstrm-networking"),
-        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
-        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
-        .product(name: "CommonLog", package: "common-log"),
-        .product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"),
-      ],
+      dependencies: tradierLibTestsDependencies,
       path: "tests/TradierLibTests",
       resources: [.process("Resources")],
     ),
@@ -154,13 +187,7 @@ let package = Package(
     ),
     .executableTarget(
       name: "TradierJSONPerfCLI",
-      dependencies: [
-        "TradierLib",
-        .product(name: "ReerJSONParserAdapter", package: "JSONParserAdapters"),
-        .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
-        .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
-        .product(name: "ArgumentParser", package: "swift-argument-parser"),
-      ],
+      dependencies: tradierJSONPerfCLIDependencies,
       path: "sources/TradierJSONPerfCLI",
       swiftSettings: [
         .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=10"])

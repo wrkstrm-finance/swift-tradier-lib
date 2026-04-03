@@ -1,6 +1,8 @@
 import ArgumentParser
 import Foundation
+#if canImport(ReerJSONParserAdapter)
 import ReerJSONParserAdapter
+#endif
 import TradierLib
 import SwiftUniversalFoundation
 import SwiftUniversalMain
@@ -32,7 +34,9 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
     let winCount = max(1, windows)
 
     let foundation = JSONDecoder.commonDateParsing
+    #if canImport(ReerJSONParserAdapter)
     let reer = ReerJSONParserAdapter.makeParser()
+    #endif
 
     struct Payload<T: Decodable> {
       let name: String
@@ -116,11 +120,13 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
           "\(pl.name),foundation,\(String(format: "%.2f", fMean)),\(String(format: "%.2f", median(fRuns))),\(String(format: "%.2f", p95(fRuns)))",
         )
 
+        #if canImport(ReerJSONParserAdapter)
         let rRuns = try runsWithinBudget { try reer.decode(T.self, from: pl.data) }
         let rMean = rRuns.reduce(0, +) / Double(rRuns.count)
         csv.append(
           "\(pl.name),reerjson,\(String(format: "%.2f", rMean)),\(String(format: "%.2f", median(rRuns))),\(String(format: "%.2f", p95(rRuns)))",
         )
+        #endif
       } catch {
         fputs("warn: failed on payload \(pl.name): \(error)\n", stderr)
       }

@@ -2,7 +2,9 @@ import Foundation
 import NIOCore
 import NIOHTTP1
 import NIOPosix
+#if canImport(NotionLib)
 import NotionLib
+#endif
 import WebSocketKit
 import CommonLog
 
@@ -95,6 +97,7 @@ public actor TradierTradeStreamService {
   }
 
   private func journal(transaction: Tradier.TradierBrokerageTransactionModel) async {
+    #if canImport(NotionLib)
     let service: Notion.CodableService = .init(token: notionToken)
     let parentEnum: Notion.ParentEnum = .database(.init(notionDatabaseId))
     do {
@@ -116,6 +119,9 @@ public actor TradierTradeStreamService {
     } catch {
       Log.error("Failed to journal trade: \(error.localizedDescription)")
     }
+    #else
+    Log.warning("Notion journaling is unavailable in this build; skipping journal for trade fill.")
+    #endif
   }
 
   private func didConnect(_ ws: WebSocket) async {

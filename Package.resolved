@@ -1,5 +1,5 @@
 {
-  "originHash" : "3f9b0947711b8eaaba81d91677a95014a904c2d29a0e86a967c8d9c5f6f2635c",
+  "originHash" : "35e1ac31e49e9772d3314aff732219c9fd2143275cef123bb0f1f7b73c0fc5db",
   "pins" : [
     {
       "identity" : "common-broker",
@@ -26,24 +26,6 @@
       "state" : {
         "revision" : "805f50da85ceee2d080dc0b9f13fe13cab0931ab",
         "version" : "3.0.5"
-      }
-    },
-    {
-      "identity" : "jjliso8601dateformatter",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/michaeleisel/JJLISO8601DateFormatter.git",
-      "state" : {
-        "revision" : "50d5ea26ffd3f82e3db8516d939d80b745e168cf",
-        "version" : "0.2.0"
-      }
-    },
-    {
-      "identity" : "reerjson",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/reers/ReerJSON.git",
-      "state" : {
-        "revision" : "14c146b6b69d2fba23793408e3dc44c532f57e6b",
-        "version" : "0.3.2"
       }
     },
     {
@@ -251,15 +233,6 @@
       "state" : {
         "revision" : "9e52f77810758a823fc4fb8761f7859589679efc",
         "version" : "3.0.6"
-      }
-    },
-    {
-      "identity" : "yyjson",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ibireme/yyjson.git",
-      "state" : {
-        "revision" : "8b4a38dc994a110abaec8a400615567bd996105f",
-        "version" : "0.12.0"
       }
     }
   ],

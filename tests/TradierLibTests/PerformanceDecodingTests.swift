@@ -151,7 +151,8 @@ struct PerformanceDecodingTests {
       ))
 
     #else
-    throw XCTSkip("ReerJSONParserAdapter unavailable in this test configuration.")
+    print("ReerJSONParserAdapter unavailable in this test configuration; skipping warmup comparison.")
+    return
     #endif
   }
 
