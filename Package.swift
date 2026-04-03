@@ -77,6 +77,13 @@ ConfigurationService.remote.dependencies = [
   .package(url: "https://github.com/apple/swift-log.git", from: "1.5.0"),
 ]
 
+ConfigurationService.local.dependencies.append(
+  .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
+)
+ConfigurationService.remote.dependencies.append(
+  .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.4.0")
+)
+
 var tradierLibDependencies: [Target.Dependency] = [
   .product(name: "SwiftUniversalMain", package: "swift-universal-main"),
   .product(name: "SwiftUniversalFoundation", package: "swift-universal-foundation"),
