@@ -30,6 +30,8 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
   var out: String?
 
   func run() async throws {
+    func now() -> TimeInterval { Date().timeIntervalSinceReferenceDate }
+
     let budget = 1.0 / max(1.0, hz)
     let winCount = max(1, windows)
 
@@ -81,9 +83,9 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
       var results: [Double] = []
       results.reserveCapacity(winCount)
       for _ in 0..<winCount {
-        let start = CFAbsoluteTimeGetCurrent()
+        let start = now()
         var count = 0.0
-        while (CFAbsoluteTimeGetCurrent() - start) < budget {
+        while (now() - start) < budget {
           _ = try decode()
           count += 1
         }
@@ -128,7 +130,9 @@ struct TradierJSONPerfCLI: AsyncParsableCommand {
         )
         #endif
       } catch {
-        fputs("warn: failed on payload \(pl.name): \(error)\n", stderr)
+        FileHandle.standardError.write(
+          Data("warn: failed on payload \(pl.name): \(error)\n".utf8)
+        )
       }
     }
 
