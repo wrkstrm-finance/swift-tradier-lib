@@ -8,6 +8,9 @@ on:
 jobs:
   swift-test:
     runs-on: ubuntu-latest
+    env:
+      SPM_USE_LOCAL_DEPS: "false"
+      SPM_CI_USE_LOCAL_DEPS: "false"
     steps:
       - uses: actions/checkout@v4
         with:
